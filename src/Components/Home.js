@@ -21,8 +21,8 @@ export default function Home() {
             onClick={() => navigate("/Page")}
             className=" w-[464px] h-[60px] bg-black rounded-lg mt-[-90px]"
           >
-            <p className="text-lg font-medium bg-black text-white">
-              ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ
+            <p className="text-lg  bg-black text-white font-helBold">
+              ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ abcdf
             </p>
           </button>
         </div>

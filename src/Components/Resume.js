@@ -1,5 +1,7 @@
 import { useEffect, useRef, React, useState } from "react";
 import isEqual from "react-fast-compare";
+import phoneicon from "./Images/phoneicon.svg";
+import emailicon from "./Images/emailicon.svg";
 
 export default function Resume({ changed }) {
   const [values, setValues] = useState("");
@@ -18,38 +20,83 @@ export default function Resume({ changed }) {
   // console.log(values.photo);
   return (
     <div className="w-[42.7%] h-fit bg-white flex flex-row justify-center box-border font-hel pb-20">
-      <div className="w-[82%] h-screen bg-white flex flex-col mt-12">
-        <div className="w-[82%] h-fit bg-white flex flex-col ">
-          <div className="flex w-[100%] h-fit flex-row ">
-            <div className="flex w-[62%] h-96 flex-col ">
-              <div className="flex w-[100%] h-20 flex-col ">
-                <p className="text-3xl font-bold text-orangeText">
-                  {values ? values.firstName : null}
-                  {/* {values ? values.lastName : null} */}
-                </p>
+      <div className="w-[83%] h-screen  flex flex-col mt-12">
+        {values ? (
+          <div className="w-[100%] h-fit  flex flex-col ">
+            <div className="flex w-[100%] h-fit flex-row mb-5">
+              <div className="flex w-[62%] h-fit flex-col ">
+                <div className="wrapper ">
+                  <p className="text-3xl font-bold text-orangeText">
+                    {values.firstName ? values.firstName + " " : null}
+                    {values.lastName ? values.lastName : null}
+                  </p>
+                </div>
+                <div className="wrapper ">
+                  <div className="flex flex-row">
+                    {values.email ? (
+                      <>
+                        <img
+                          src={emailicon}
+                          alt=""
+                          className={"w-[20px] h-[20px] mt-[8px] mr-2"}
+                        ></img>
+
+                        <p className="text-[22px]  font-medium text-black mb-1 ">
+                          {values.email}
+                        </p>
+                      </>
+                    ) : null}
+                  </div>
+                  <div className="flex flex-row">
+                    {values.number ? (
+                      <>
+                        <img
+                          src={phoneicon}
+                          alt=""
+                          className={"w-[20px] h-[20px] mt-[8px] mr-2"}
+                        ></img>
+
+                        <p className="text-[22px]  font-medium text-black mb-1">
+                          {values.number}
+                        </p>
+                      </>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="wrapper mb-0">
+                  {values.personalInfo ? (
+                    <>
+                      <p className="text-xl font-bold text-orangeText mb-4">
+                        "ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"
+                      </p>
+                      <p className=" text-black text-[16px] font-medium  mb-3 ">
+                        {values.personalInfo}
+                      </p>
+                    </>
+                  ) : null}
+                </div>
               </div>
-            </div>
-            <div className="flex w-[38%] h-96 flex-col ">
-              <div className="flex w-[245px] h-[245px] flex-col ">
-                {values ? (
-                  values.photo ? (
+              <div className="flex w-[38%] h-fit flex-col ">
+                <div className="flex w-[245px] h-[245px] flex-col ">
+                  {values.photo ? (
                     <img
                       src={values ? values.photo : null}
                       alt=""
                       className={"w-[245px] h-[245px] rounded-full"}
                     ></img>
-                  ) : null
-                ) : null}
-                {/* <img
-                  src={values ? values.photo : null}
-                  alt=""
-                  className={"w-[245px] h-[245px]"}
-                ></img> */}
+                  ) : null}
+                </div>
               </div>
             </div>
+            {values.firstName &&
+            values.lastName &&
+            values.photo &&
+            values.photo &&
+            values.photo ? (
+              <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
+            ) : null}
           </div>
-          <div className="flex w-[100%] h-[1px] flex-col bg-black"></div>
-        </div>
+        ) : null}
       </div>
     </div>
   );

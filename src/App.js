@@ -26,7 +26,6 @@ export default function App() {
   return (
     <>
       <div>
-        <Navbar />
         <RouterProvider router={router} />
       </div>
     </>

@@ -10,7 +10,7 @@ module.exports = {
         logo: "url('./Components/Images/logo.svg')",
       },
       fontFamily: {
-        hel: ["HelveticaNeue", "sans-serif"],
+        hel: ["HelveticaNeue"],
       },
       colors: {
         bgGray: "rgb(249,249,249,1)",

@@ -25,15 +25,15 @@ export default function Input2(props) {
           className={
             props.thicc
               ? props.errors && props.touched
-                ? "inputFieldError h-[100px] resize-none"
+                ? "inputFieldError h-[100px] resize-none py-2"
                 : !props.errors && props.touched
-                ? "inputFieldValid h-[100px] resize-none"
-                : "inputField h-[100px] resize-none"
+                ? "inputFieldValid h-[100px] resize-none py-2"
+                : "inputField h-[100px] resize-none py-2 "
               : props.errors && props.touched
-              ? "inputFieldError"
+              ? "inputFieldError py-2"
               : !props.errors && props.touched
-              ? "inputFieldValid"
-              : "inputField"
+              ? "inputFieldValid py-2"
+              : "inputField py-2"
           }
         />
         <img

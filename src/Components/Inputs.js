@@ -11,9 +11,7 @@ export default function Inputs(props) {
     <>
       <p
         className={
-          props.errors && props.touched
-            ? "flex w-[100%] mb-2 text-base font-semibold text-[rgba(239,80,80,1)] "
-            : "flex w-[100%] mb-2 text-base font-semibold text-black "
+          props.errors && props.touched ? "labelTextError " : "labelText "
         }
       >
         {props.label}

@@ -1,0 +1,7 @@
+[template]
+  incoming-hooks = ["Contentful"]
+
+  [[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200

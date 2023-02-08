@@ -30,11 +30,21 @@ export default function Resume({ changed }) {
               </div>
             </div>
             <div className="flex w-[38%] h-96 flex-col ">
-              <div className="flex w-20 h-20 flex-col ">
-                <img
+              <div className="flex w-[245px] h-[245px] flex-col ">
+                {values ? (
+                  values.photo ? (
+                    <img
+                      src={values ? values.photo : null}
+                      alt=""
+                      className={"w-[245px] h-[245px] rounded-full"}
+                    ></img>
+                  ) : null
+                ) : null}
+                {/* <img
                   src={values ? values.photo : null}
-                  className=" w-[245px] h-[245px]"
-                ></img>
+                  alt=""
+                  className={"w-[245px] h-[245px]"}
+                ></img> */}
               </div>
             </div>
           </div>

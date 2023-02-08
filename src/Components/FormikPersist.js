@@ -1,5 +1,4 @@
 import { Formik, Form, Field, useFormikContext } from "formik";
-import * as Yup from "yup";
 import { useEffect, useRef, React } from "react";
 import isEqual from "react-fast-compare";
 

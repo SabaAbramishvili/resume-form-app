@@ -20,18 +20,18 @@ export default function Resume({ changed }) {
   // console.log(values.photo);
   return (
     <div className="w-[42.7%] h-fit bg-white flex flex-row justify-center box-border font-hel pb-20">
-      <div className="w-[83%] h-screen  flex flex-col mt-12">
+      <div className="w-[83%] h-screen  flex flex-col mt-[74px]">
         {values ? (
           <div className="w-[100%] h-fit  flex flex-col ">
             <div className="flex w-[100%] h-fit flex-row mb-5">
               <div className="flex w-[62%] h-fit flex-col ">
-                <div className="wrapper ">
-                  <p className="text-3xl font-bold text-orangeText">
+                <div className="wrapper min-h-[36px]">
+                  <p className="text-3xl font-extrabold text-orangeText">
                     {values.firstName ? values.firstName + " " : null}
                     {values.lastName ? values.lastName : null}
                   </p>
                 </div>
-                <div className="wrapper ">
+                <div className="wrapper min-h-[74px]">
                   <div className="flex flex-row">
                     {values.email ? (
                       <>
@@ -63,13 +63,13 @@ export default function Resume({ changed }) {
                     ) : null}
                   </div>
                 </div>
-                <div className="wrapper mb-0">
+                <div className="wrapper h-fit mb-0">
                   {values.personalInfo ? (
                     <>
-                      <p className="text-xl font-bold text-orangeText mb-4">
-                        "ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"
+                      <p className="text-lg h-fit font-bold text-orangeText mb-4">
+                        {"ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"}
                       </p>
-                      <p className=" text-black text-[16px] font-medium  mb-3 ">
+                      <p className=" text-black h-fit w-[100%] text-[16px] font-medium  mb-3 ">
                         {values.personalInfo}
                       </p>
                     </>

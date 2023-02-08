@@ -41,13 +41,13 @@ const AutoSubmitToken = () => {
   return null;
 };
 
-function stuff(e) {
-  console.log(e);
-}
-
 //
 
-export default function Form1() {
+export default function Form1({ aa }) {
+  function stuff(e) {
+    aa(0);
+  }
+
   return (
     <>
       <div className="w-[57.3%] h-fit bg-bgGray flex flex-row justify-center box-border font-hel pb-20">

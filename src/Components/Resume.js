@@ -10,8 +10,10 @@ import Inputs from "./Inputs";
 import Input2 from "./Input2";
 import FormikPersist from "./FormikPersist";
 
-export default function Resume() {
+export default function Resume({ changed }) {
   const [values, setValues] = useState("");
+  let i = changed();
+  console.log(i);
 
   useEffect(() => {
     const savedForm = window.localStorage.getItem("our-form");
@@ -19,8 +21,9 @@ export default function Resume() {
     if (!isEqual(savedForm, values)) {
       const parsedForm = JSON.parse(savedForm);
       setValues(parsedForm);
+      console.log("loadddddddd");
     }
-  }, []);
+  }, [i]);
   // console.log(values.photo);
   return (
     <div className="w-[42.7%] h-fit bg-white flex flex-row justify-center box-border font-hel pb-20">

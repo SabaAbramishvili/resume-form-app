@@ -22,7 +22,7 @@ export default function Home() {
             className=" w-[464px] h-[60px] bg-black rounded-lg mt-[-90px]"
           >
             <p className="text-lg  bg-black text-white font-helBold">
-              ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ abcdf
+              {"ᲠᲔᲖᲘᲣᲛᲔᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ"}
             </p>
           </button>
         </div>

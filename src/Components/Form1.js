@@ -8,8 +8,8 @@ import correcticon from "./Images/correcticon.svg";
 import erroricon from "./Images/erroricon.svg";
 import Inputs from "./Inputs";
 import Input2 from "./Input2";
-
 import FormikPersist from "./FormikPersist";
+
 const nameRegex = /^[ა-ჰ]+$/;
 const numRegex = /(\d{3})\)?-?\s?(\d{2})-?\s?(\d{2})-?\s?(\d{2})/;
 const mailRegex = /^[a-zA-Z]{1,}@(redberry)\.ge/;
@@ -35,48 +35,15 @@ const SignupSchema = Yup.object().shape({
     .required("შეიყვანეთ"),
 });
 
-// const FormikPersist = ({ name }) => {
-//   console.log("''''''''''''''''''''''''");
-//   const { values, setValues } = useFormikContext();
-//   const { touched, setTouched } = useFormikContext();
-//   console.log(touched);
-//   const prefValuesRef = useRef();
-//   console.log(values);
-//   const onSave = (values) => {
-//     window.localStorage.setItem(name, JSON.stringify(values));
-//   };
-//   useEffect(() => {
-//     const savedForm = window.localStorage.getItem(name);
-//     if (savedForm) {
-//       const parsedForm = JSON.parse(savedForm);
-//       prefValuesRef.current = parsedForm;
-//       setValues(parsedForm);
-//     }
-//   }, [name, setValues]);
-
-//   useEffect(() => {
-//     if (!isEqual(prefValuesRef.current, values)) {
-//       const timeout = setTimeout(() => {
-//         onSave(values);
-//       }, 100);
-//       return () => clearTimeout(timeout);
-//     }
-//   }, [values]);
-
-//   useEffect(() => {
-//     prefValuesRef.current = values;
-//   });
-
-//   return null;
-// };
-
 const AutoSubmitToken = () => {
   const { values, submitForm } = useFormikContext();
-  useEffect(() => {
-    console.log(values);
-  }, [values, submitForm]);
+  useEffect(() => {}, [values, submitForm]);
   return null;
 };
+
+function stuff(e) {
+  console.log(e);
+}
 
 //
 
@@ -100,10 +67,6 @@ export default function Form1() {
               console.log("'''''''");
             }}
           >
-            {/*  
-                
-                
-                */}
             {({ errors, touched, values, setFieldValue }) => (
               <Form>
                 <div className="wrapper ">
@@ -128,10 +91,6 @@ export default function Form1() {
                     </div>
                   </div>
                 </div>
-                {/*  
-                
-            
-                */}
                 <div className="mb-12 flex flex-row">
                   <p
                     className={
@@ -152,12 +111,14 @@ export default function Form1() {
                       name="photo"
                       type="file"
                       className="hidden"
-                      onChange={(event) => {
-                        console.log(event.currentTarget.files[0]);
-                        setFieldValue(
-                          "photo",
-                          document.querySelector("#photo").value
-                        );
+                      onChange={(e) => {
+                        const image = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.readAsDataURL(image);
+                        reader.addEventListener("load", () => {
+                          localStorage.setItem("photo", reader.result);
+                          setFieldValue("photo", reader.result);
+                        });
                       }}
                     />
                   </label>
@@ -205,8 +166,7 @@ export default function Form1() {
                 <button type="submit" className="bg-green-900">
                   Submit
                 </button>
-
-                <FormikPersist name="our-form" />
+                <FormikPersist name="our-form" doit={(e) => stuff(e)} />
               </Form>
             )}
           </Formik>

@@ -17,6 +17,7 @@ module.exports = {
         borderGray: "rgba(188,188,188,1)",
         redText: "rgba(229,47,47,1)",
         redElement: "rgba(239,80,80,1)",
+        orangeText: "rgba(249,59,29,1)",
       },
     },
   },

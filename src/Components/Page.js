@@ -11,7 +11,7 @@ import Input2 from "./Input2";
 import Form1 from "./Form1";
 import Resume from "./Resume";
 
-export default function Page() {
+export default function Page({ doit }) {
   return (
     <div className="h-fit flex flex-row justify-between">
       <Form1 />

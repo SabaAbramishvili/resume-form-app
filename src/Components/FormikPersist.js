@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import { useEffect, useRef, React } from "react";
 import isEqual from "react-fast-compare";
 
-const FormikPersist = ({ name }) => {
-  console.log("''''''''''''''''''''''''");
+const FormikPersist = ({ name, doit }) => {
+  // console.log("''''''''''''''''''''''''");
   const { values, setValues } = useFormikContext();
-  console.log(values);
+  // console.log(values);
   const prefValuesRef = useRef();
   const onSave = (values) => {
     window.localStorage.setItem(name, JSON.stringify(values));
@@ -23,6 +23,7 @@ const FormikPersist = ({ name }) => {
   useEffect(() => {
     if (!isEqual(prefValuesRef.current, values)) {
       const timeout = setTimeout(() => {
+        doit("changed");
         onSave(values);
       }, 100);
       return () => clearTimeout(timeout);

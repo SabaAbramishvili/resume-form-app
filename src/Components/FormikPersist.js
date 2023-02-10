@@ -22,7 +22,9 @@ const FormikPersist = ({ name, doit }) => {
   useEffect(() => {
     if (!isEqual(prefValuesRef.current, values)) {
       const timeout = setTimeout(() => {
-        doit("changed");
+        // doit("changed");
+        doit(values);
+
         onSave(values);
       }, 100);
       return () => clearTimeout(timeout);

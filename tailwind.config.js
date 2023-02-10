@@ -2,6 +2,17 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
+    screens: {
+      tablet: "640px",
+      // => @media (min-width: 640px) { ... }
+
+      laptop: "1024px",
+      // => @media (min-width: 1024px) { ... }
+
+      desktop: "1280px",
+      // => @media (min-width: 1280px) { ... }
+    },
+
     extend: {
       backgroundImage: {
         homePage: "url('./Components/Images/home.svg')",
@@ -13,10 +24,11 @@ module.exports = {
         hel: ["HelveticaNeue"],
       },
       colors: {
-        bgGray: "rgb(249,249,249,1)",
+        bgGray: "rgba(249,249,249,1)",
         borderGray: "rgba(188,188,188,1)",
         redText: "rgba(229,47,47,1)",
         redElement: "rgba(239,80,80,1)",
+        greenElement: "rgba(152,227,126,1)",
         orangeText: "rgba(249,59,29,1)",
       },
     },

@@ -18,7 +18,7 @@ export default function Home() {
         </div>
         <div className="h-screen w-screen flex justify-center items-center ">
           <button
-            onClick={() => navigate("/Page")}
+            onClick={() => navigate("/Page1")}
             className=" w-[464px] h-[60px] bg-black rounded-lg mt-[-90px]"
           >
             <p className="text-lg  bg-black text-white font-helBold">

@@ -4,36 +4,38 @@ import phoneicon from "./Images/phoneicon.svg";
 import emailicon from "./Images/emailicon.svg";
 
 export default function Resume({ changed }) {
-  const [values, setValues] = useState("");
+  const [values1, setValues1] = useState("");
+
   let i = changed();
-  console.log(i);
+  // console.log(i);
 
   useEffect(() => {
-    const savedForm = window.localStorage.getItem("our-form");
+    const savedForm = window.localStorage.getItem("page1");
     // console.log(savedForm);
-    if (!isEqual(savedForm, values)) {
+    if (!isEqual(savedForm, values1)) {
       const parsedForm = JSON.parse(savedForm);
-      setValues(parsedForm);
-      console.log("loadddddddd");
+      setValues1(parsedForm);
+      // console.log("loaded");
     }
   }, [i]);
-  // console.log(values.photo);
+  // console.log(values1.photo);
   return (
-    <div className="w-[42.7%] h-fit bg-white flex flex-row justify-center box-border font-hel pb-20">
+    <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel pb-20">
+      <div className="w-[8.5%]"></div>
       <div className="w-[83%] h-screen  flex flex-col mt-[74px]">
-        {values ? (
+        {values1 ? (
           <div className="w-[100%] h-fit  flex flex-col ">
             <div className="flex w-[100%] h-fit flex-row mb-5">
               <div className="flex w-[62%] h-fit flex-col ">
                 <div className="wrapper min-h-[36px]">
                   <p className="text-3xl font-extrabold text-orangeText">
-                    {values.firstName ? values.firstName + " " : null}
-                    {values.lastName ? values.lastName : null}
+                    {values1.firstName ? values1.firstName + " " : null}
+                    {values1.lastName ? values1.lastName : null}
                   </p>
                 </div>
                 <div className="wrapper min-h-[74px]">
                   <div className="flex flex-row">
-                    {values.email ? (
+                    {values1.email ? (
                       <>
                         <img
                           src={emailicon}
@@ -42,13 +44,13 @@ export default function Resume({ changed }) {
                         ></img>
 
                         <p className="text-[22px]  font-medium text-black mb-1 ">
-                          {values.email}
+                          {values1.email}
                         </p>
                       </>
                     ) : null}
                   </div>
                   <div className="flex flex-row">
-                    {values.number ? (
+                    {values1.number ? (
                       <>
                         <img
                           src={phoneicon}
@@ -57,47 +59,48 @@ export default function Resume({ changed }) {
                         ></img>
 
                         <p className="text-[22px]  font-medium text-black mb-1">
-                          {values.number}
+                          {values1.number}
                         </p>
                       </>
                     ) : null}
                   </div>
                 </div>
                 <div className="wrapper h-fit mb-0">
-                  {values.personalInfo ? (
+                  {values1.personalInfo ? (
                     <>
                       <p className="text-lg h-fit font-bold text-orangeText mb-4">
                         {"ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"}
                       </p>
                       <p className=" text-black h-fit w-[100%] text-[16px] font-medium  mb-3 ">
-                        {values.personalInfo}
+                        {values1.personalInfo}
                       </p>
                     </>
                   ) : null}
                 </div>
               </div>
               <div className="flex w-[38%] h-fit flex-col ">
-                <div className="flex w-[245px] h-[245px] flex-col ">
-                  {values.photo ? (
+                <div className="flex w-fit h-fit flex-col ">
+                  {values1.photo ? (
                     <img
-                      src={values ? values.photo : null}
+                      src={values1 ? values1.photo : null}
                       alt=""
-                      className={"w-[245px] h-[245px] rounded-full"}
+                      className={"w-[100%] aspect-square rounded-full"}
                     ></img>
                   ) : null}
                 </div>
               </div>
             </div>
-            {values.firstName &&
-            values.lastName &&
-            values.photo &&
-            values.photo &&
-            values.photo ? (
+            {values1.firstName &&
+            values1.lastName &&
+            values1.photo &&
+            values1.photo &&
+            values1.photo ? (
               <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
             ) : null}
           </div>
         ) : null}
       </div>
+      <div className="w-[8.5%]"></div>
     </div>
   );
 }

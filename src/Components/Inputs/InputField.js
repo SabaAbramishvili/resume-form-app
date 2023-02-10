@@ -1,6 +1,6 @@
 import { useFormik, Field } from "formik";
-import correcticon from "./Images/correcticon.svg";
-import erroricon from "./Images/erroricon.svg";
+import correcticon from "../Images/correcticon.svg";
+import erroricon from "../Images/erroricon.svg";
 import { React, useState } from "react";
 
 export default function Inputs(props) {
@@ -18,19 +18,22 @@ export default function Inputs(props) {
       </p>
       <div className="flex w-[100%] flex-row items-center justify-end">
         <Field
+          type={props.type}
           name={props.name}
           className={
-            props.thicc
+            props.type === "text"
               ? props.errors && props.touched
-                ? "inputFieldError h-[100px]"
+                ? "inputFieldError"
                 : !props.errors && props.touched
-                ? "inputFieldValid h-[100px]"
-                : "inputField h-[100px]"
-              : props.errors && props.touched
-              ? "inputFieldError"
-              : !props.errors && props.touched
-              ? "inputFieldValid"
-              : "inputField"
+                ? "inputFieldValid"
+                : "inputField"
+              : props.type === "date"
+              ? props.errors && props.touched
+                ? "inputFieldError px-4"
+                : !props.errors && props.touched
+                ? "inputFieldValid px-4"
+                : "inputField px-4"
+              : null
           }
         />
         <img
@@ -42,11 +45,15 @@ export default function Inputs(props) {
               : correcticon
           }
           className={
-            props.errors && props.touched
-              ? "inputIconError"
-              : !props.errors && props.touched
-              ? "inputIconValid"
-              : "inputIconHidden"
+            props.type === "text"
+              ? props.errors && props.touched
+                ? "inputIconError"
+                : !props.errors && props.touched
+                ? "inputIconValid"
+                : "inputIconHidden"
+              : props.type === "date"
+              ? "inputIconHidden"
+              : null
           }
         />
       </div>

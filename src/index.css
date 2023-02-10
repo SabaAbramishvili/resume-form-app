@@ -19,16 +19,16 @@
     @apply mb-2 w-[calc(50%-28px)] pl-4 pr-12 rounded-md h-12 border-[1px] text-base border-borderGray focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
   }
   .inputFieldValid {
-    @apply mb-2 w-[100%] pl-4 pr-12 rounded-md h-12 border-[1px] text-base border-[rgba(152,227,126,1)] focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
+    @apply mb-2 w-[100%] pl-4 pr-12 rounded-md h-12 border-[1px] text-base border-greenElement focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
   }
   .inputFieldValid2 {
-    @apply mb-2 w-[calc(50%-28px)] pl-4 pr-12 rounded-md h-12 border-[1px]  border-[rgba(152,227,126,1)] focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
+    @apply mb-2 w-[calc(50%-28px)] pl-4 pr-12 rounded-md h-12 border-[1px]  border-greenElement focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
   }
   .inputFieldError {
-    @apply mb-2 w-[100%] pl-4 pr-12 rounded-md h-12 border-[1px]  border-[rgba(239,80,80,1)] focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
+    @apply mb-2 w-[100%] pl-4 pr-12 rounded-md h-12 border-[1px]  border-redElement focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
   }
   .inputFieldError2 {
-    @apply mb-2 w-[calc(50%-28px)] pl-4 pr-12 rounded-md h-12 border-[1px]  border-[rgba(239,80,80,1)] focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
+    @apply mb-2 w-[calc(50%-28px)] pl-4 pr-12 rounded-md h-12 border-[1px]  border-redElement focus:border-[2px] focus:border-borderGray outline-borderGray outline-0;
   }
   .inputIconValid {
     @apply w-[18px] h-[18px] box-content absolute pr-[15px] mb-[9px];

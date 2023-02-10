@@ -1,7 +1,8 @@
 import Home from "./Components/Home";
 import Form1 from "./Components/Form1";
 import Navbar from "./Components/Navbar";
-import Page from "./Components/Page";
+import Page1 from "./Components/Page1";
+import Page2 from "./Components/Page2";
 
 import {
   createBrowserRouter,
@@ -19,7 +20,8 @@ export default function App() {
       <Route>
         <Route path="/" index element={<Home />} />
         <Route path="/Form1" element={<Form1 />} />
-        <Route path="/Page" element={<Page />} />
+        <Route path="/Page1" element={<Page1 />} />
+        <Route path="/Page2" element={<Page2 />} />
       </Route>
     )
   );
@@ -38,7 +40,8 @@ const Root = () => {
         <Link to="/">/</Link>
         <Link to="/Home">Home</Link>
         <Link to="/Form1">Form1</Link>
-        <Link to="/Page">Page</Link>
+        <Link to="/Page1">Page1</Link>
+        <Link to="/Page2">Page2</Link>
       </div>
       <div>
         <Outlet />

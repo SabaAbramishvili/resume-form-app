@@ -3,16 +3,18 @@ import * as Yup from "yup";
 import { useEffect, useRef, React } from "react";
 import isEqual from "react-fast-compare";
 import Navbar from "./Navbar";
-import Inputs from "./Inputs";
-import Input2 from "./Input2";
+import InputField from "./Inputs/InputField";
+import InputElement from "./Inputs/InputElement";
+import InputElementLarge from "./Inputs/InputLargeElement";
+import InputFieldLarge from "./Inputs/InputFieldLarge";
 import FormikPersist from "./FormikPersist";
+import { useNavigate } from "react-router-dom";
 
 const nameRegex = /^[ა-ჰ]+$/;
 const numRegex2 = /(\d{3})\)?-?\s?(\d{2})-?\s?(\d{2})-?\s?(\d{2})/;
 const numRegex3 =
   /^\s*(?:\+?(\d{3}))?([-. (]*(\d{3})[-. )]*)?((\d{2})[-. ]*(\d{2})?((\d{2})[-. ]*(\d{2}))?)\s*$/;
 const numRegex = /^([+]?\d{3}[-\s]?|)\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
-
 const mailRegex = /^[a-z0-9_-]{1,}@(redberry)\.ge/;
 
 const SignupSchema = Yup.object().shape({
@@ -45,16 +47,20 @@ const AutoSubmitToken = () => {
 //
 
 export default function Form1({ aa }) {
+  const navigate = useNavigate();
   function stuff(e) {
     aa(0);
   }
 
   return (
     <>
-      <div className="w-[57.3%] h-fit bg-bgGray flex flex-col box-border font-hel ">
+      <div className="w-[100%] tablet:w-[58%] h-fit bg-bgGray flex flex-col box-border font-hel ">
         <Navbar pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNum={"1/3"} />
         <div className="w-[100%] h-fit bg-bgGray flex flex-col box-border font-hel pb-20 items-center">
           <div className="w-[73%] h-screen bg-bgGray flex flex-col">
+            {/* 
+            
+            */}
             <Formik
               initialValues={{
                 firstName: "",
@@ -63,18 +69,41 @@ export default function Form1({ aa }) {
                 personalInfo: "",
                 email: "",
                 number: "",
+                position: "",
+                employer: "",
+                startDate: "",
+                endDate: "",
+                jobDescription: "",
+                education: "",
+                position2: "",
+                employer2: "",
+                startDate2: "",
+                endDate2: "",
+                jobDescription2: "",
+                education2: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("'''''''");
+                navigate("/page2");
               }}
             >
-              {({ errors, touched, values, setFieldValue }) => (
+              {({
+                errors,
+                touched,
+                values,
+                setFieldValue,
+                setFieldTouched,
+              }) => (
                 <Form>
+                  {/* 
+            
+            */}
+
                   <div className="wrapper ">
-                    <div className="flex justify-between">
-                      <div className="flex flex-col w-[calc(50%-28px)]">
-                        <Inputs
+                    {/* <div className="flex justify-between flex-col laptop:flex-row  ">
+                      <div className="flex  flex-col laptop:w-[47%]">
+                        <InputField
                           name={"firstName"}
                           errors={errors.firstName}
                           touched={touched.firstName}
@@ -82,8 +111,8 @@ export default function Form1({ aa }) {
                           hint={"მინიმუმ 2 ასო, ქართული ასოები"}
                         />
                       </div>
-                      <div className="flex flex-col w-[calc(50%-28px)]">
-                        <Inputs
+                      <div className="flex  flex-col laptop:w-[47%]">
+                        <InputField
                           name={"lastName"}
                           errors={errors.lastName}
                           touched={touched.lastName}
@@ -91,7 +120,22 @@ export default function Form1({ aa }) {
                           hint={"მინიმუმ 2 ასო, ქართული ასოები"}
                         />
                       </div>
-                    </div>
+                    </div> */}
+                    {InputElement(
+                      "text",
+                      "firstName",
+                      "სახელი",
+                      "მინიმუმ 2 ასო, ქართული ასოები",
+                      errors.firstName,
+                      touched.firstName,
+                      2,
+                      "text",
+                      "lastName",
+                      "გვარი",
+                      "მინიმუმ 2 ასო, ქართული ასოები",
+                      errors.lastName,
+                      touched.lastName
+                    )}
                   </div>
                   <div className="mb-12 flex flex-row">
                     <p
@@ -127,38 +171,42 @@ export default function Form1({ aa }) {
                   </div>
 
                   <div className="wrapper ">
-                    <Input2
-                      name={"personalInfo"}
-                      errors={errors.personalInfo}
-                      touched={touched.personalInfo}
-                      label={"ჩემ შესახებ (არასავალდებულო)"}
-                      hint={""}
-                      thicc={"thicc"}
-                      setValue={(e) => {
+                    {InputElementLarge(
+                      "personalInfo",
+                      "ჩემ შესახებ (არასავალდებულო)",
+                      "",
+                      errors.personalInfo,
+                      touched.personalInfo,
+                      values.personalInfo,
+                      (e) => {
                         setFieldValue("personalInfo", e.target.value);
-                      }}
-                      value={values.personalInfo}
-                    />
+                        setFieldTouched("personalInfo", true);
+                      },
+                      1,
+                      "required"
+                    )}
                   </div>
                   <div className="wrapper">
-                    <Inputs
-                      name={"email"}
-                      errors={errors.email}
-                      touched={touched.email}
-                      label={"ელ.ფოსტა"}
-                      hint={"უნდა მთავრდებოდეს @redberry.ge-ით"}
-                    />
+                    {InputElement(
+                      "text",
+                      "email",
+                      "ელ.ფოსტა",
+                      "უნდა მთავრდებოდეს @redberry.ge-ით",
+                      errors.email,
+                      touched.email,
+                      1
+                    )}
                   </div>
                   <div className="wrapper">
-                    <Inputs
-                      name={"number"}
-                      errors={errors.number}
-                      touched={touched.number}
-                      label={"მობილურის ნომერი"}
-                      hint={
-                        "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"
-                      }
-                    />
+                    {InputElement(
+                      "text",
+                      "number",
+                      "მობილურის ნომერი",
+                      "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს",
+                      errors.number,
+                      touched.number,
+                      1
+                    )}
                   </div>
 
                   {/* 
@@ -168,7 +216,7 @@ export default function Form1({ aa }) {
                   <button type="submit" className="bg-green-900">
                     Submit
                   </button>
-                  <FormikPersist name="our-form" doit={(e) => stuff(e)} />
+                  <FormikPersist name="page1" doit={(e) => stuff(e)} />
                 </Form>
               )}
             </Formik>

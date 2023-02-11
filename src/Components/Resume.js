@@ -20,12 +20,13 @@ export default function Resume({ changed }) {
   }, [i]);
   // console.log(values1.photo);
   return (
-    <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel pb-20">
+    <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel ">
       <div className="w-[8.5%]"></div>
-      <div className="w-[83%] h-screen  flex flex-col mt-[74px]">
+      {console.log(values1)}
+      <div className="w-[83%] h-fit  flex flex-col mt-[74px] pb-20">
         {values1 ? (
           <div className="w-[100%] h-fit  flex flex-col ">
-            <div className="flex w-[100%] h-fit flex-row mb-5">
+            <div className="flex w-[100%] h-fit flex-row mb-3">
               <div className="flex w-[62%] h-fit flex-col ">
                 <div className="wrapper min-h-[36px]">
                   <p className="text-3xl font-extrabold text-orangeText">
@@ -40,10 +41,10 @@ export default function Resume({ changed }) {
                         <img
                           src={emailicon}
                           alt=""
-                          className={"w-[20px] h-[20px] mt-[8px] mr-2"}
+                          className={"w-[20px] h-[20px] mt-[6px] mr-2"}
                         ></img>
 
-                        <p className="text-[22px]  font-medium text-black mb-1 ">
+                        <p className="  text-lg font-medium text-black mb-1 ">
                           {values1.email}
                         </p>
                       </>
@@ -55,10 +56,10 @@ export default function Resume({ changed }) {
                         <img
                           src={phoneicon}
                           alt=""
-                          className={"w-[20px] h-[20px] mt-[8px] mr-2"}
+                          className={"w-[20px] h-[20px] mt-[6px] mr-2"}
                         ></img>
 
-                        <p className="text-[22px]  font-medium text-black mb-1">
+                        <p className="text-lg  font-medium  text-black mb-1   ">
                           {values1.number}
                         </p>
                       </>
@@ -97,6 +98,44 @@ export default function Resume({ changed }) {
             values1.photo ? (
               <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
             ) : null}
+            <div
+              className={
+                values1.position && values1.employer
+                  ? "w-[100%] h-fit  flex flex-col "
+                  : "hidden"
+              }
+            >
+              <div className="wrapper min-h-[36px] mt-5">
+                <div className="wrapper h-fit mb-0">
+                  {values1.position ? (
+                    <>
+                      <p className="text-lg h-fit font-bold text-orangeText mb-3">
+                        {"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ"}
+                      </p>
+                      <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
+                        {/* {values1.position + ", " + values1.employer} */}
+                        {values1.position ? values1.position + ", " : ""}
+                        {values1.employer ? values1.employer : ""}
+                      </p>
+                      <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
+                        {values1.startDate ? values1.startDate + " - " : ""}
+                        {values1.endDate ? values1.endDate : ""}
+                      </p>
+                      <p className=" text-black h-fit w-[100%] text-[16px]   leading-6 tracking-wide font-medium	 mb-3  font-hel  ">
+                        {values1.jobDescription}
+                      </p>
+                    </>
+                  ) : null}
+                  {values1.position &&
+                  values1.employer &&
+                  values1.startDate &&
+                  values1.endDate &&
+                  values1.jobDescription ? (
+                    <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
+                  ) : null}
+                </div>
+              </div>
+            </div>
           </div>
         ) : null}
       </div>

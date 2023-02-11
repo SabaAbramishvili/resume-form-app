@@ -3,6 +3,7 @@ import Form1 from "./Components/Form1";
 import Navbar from "./Components/Navbar";
 import Page1 from "./Components/Page1";
 import Page2 from "./Components/Page2";
+import Page3 from "./Components/Page3";
 
 import {
   createBrowserRouter,
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/Form1" element={<Form1 />} />
         <Route path="/Page1" element={<Page1 />} />
         <Route path="/Page2" element={<Page2 />} />
+        <Route path="/Page3" element={<Page3 />} />
       </Route>
     )
   );
@@ -42,6 +44,7 @@ const Root = () => {
         <Link to="/Form1">Form1</Link>
         <Link to="/Page1">Page1</Link>
         <Link to="/Page2">Page2</Link>
+        <Link to="/Page3">Page3</Link>
       </div>
       <div>
         <Outlet />

@@ -30,7 +30,7 @@ export default function InputFieldLarge(props) {
             props.errors && props.touched
               ? "inputFieldError h-[100px] resize-none py-2 px-4 border-red"
               : !props.errors && props.touched
-              ? "inputFieldValid h-[100px] resize-none py-2 px-4"
+              ? "inputFieldValid h-[100px] resize-none py-2 px-4  "
               : "inputField h-[100px] resize-none py-2 px-4"
           }
         />

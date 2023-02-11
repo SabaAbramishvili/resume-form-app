@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.2.5"
+    "tailwindcss": "^3.2.5",
+    "tailwindcss-text-rendering": "^1.0.2"
   }
 }

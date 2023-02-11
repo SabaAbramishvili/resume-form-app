@@ -12,6 +12,7 @@ module.exports = {
       desktop: "1280px",
       // => @media (min-width: 1280px) { ... }
     },
+    plugins: [require("tailwindcss-text-rendering")],
 
     extend: {
       backgroundImage: {
@@ -22,6 +23,9 @@ module.exports = {
       },
       fontFamily: {
         hel: ["HelveticaNeue"],
+        helBold: ["HelveticaNeuBold"],
+        helMedium: ["HelveticaNeueMedium"],
+        helLight: ["HelveticaNeueLight"],
       },
       colors: {
         bgGray: "rgba(249,249,249,1)",
@@ -30,6 +34,7 @@ module.exports = {
         redElement: "rgba(239,80,80,1)",
         greenElement: "rgba(152,227,126,1)",
         orangeText: "rgba(249,59,29,1)",
+        textGray: "rgba(144,144,144,1)",
       },
     },
   },

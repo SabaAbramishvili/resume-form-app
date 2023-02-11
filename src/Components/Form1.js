@@ -57,7 +57,7 @@ export default function Form1({ aa }) {
       <div className="w-[100%] tablet:w-[58%] h-fit bg-bgGray flex flex-col box-border font-hel ">
         <Navbar pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNum={"1/3"} />
         <div className="w-[100%] h-fit bg-bgGray flex flex-col box-border font-hel pb-20 items-center">
-          <div className="w-[73%] h-screen bg-bgGray flex flex-col">
+          <div className="w-[72%] h-screen bg-bgGray flex flex-col">
             {/* 
             
             */}
@@ -75,12 +75,7 @@ export default function Form1({ aa }) {
                 endDate: "",
                 jobDescription: "",
                 education: "",
-                position2: "",
-                employer2: "",
-                startDate2: "",
-                endDate2: "",
-                jobDescription2: "",
-                education2: "",
+                experienceNumber: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {

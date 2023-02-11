@@ -22,7 +22,7 @@ const numRegex3 =
 const numRegex = /^([+]?\d{3}[-\s]?|)\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
 const mailRegex = /^[a-z0-9_-]{1,}@(redberry)\.ge/;
 
-export default function Form2({ aa }) {
+export default function Form3({ aa }) {
   const navigate = useNavigate();
 
   const SignupSchema = Yup.object().shape({
@@ -40,7 +40,12 @@ export default function Form2({ aa }) {
       .min(2, "Too Short!")
       .matches(nameRegex2, "ქართული ასოები")
       .required("Required"),
-    education: Yup.string().when([], {
+    education: Yup.string()
+      .min(2, "Too Short!")
+      .matches(nameRegex2, "ქართული ასოები")
+      .required("Required"),
+
+    education2: Yup.string().when([], {
       is: () => filled && true,
       then: Yup.string()
         .min(2, "Too Short!")
@@ -134,6 +139,7 @@ export default function Form2({ aa }) {
   const func = () => {
     console.log("subbbbbbbbbbb");
   };
+
   const newForm2 = (sub) => {
     function stuff(formikValues) {
       // console.log(formikValues);
@@ -296,34 +302,17 @@ export default function Form2({ aa }) {
   return (
     <>
       <div className="w-[100%] tablet:w-[58%] h-fit bg-bgGray flex flex-col box-border font-hel  ">
-        <Navbar pageName={"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ"} pageNum={"2/3"} />
+        <Navbar pageName={"ᲒᲐᲜᲐᲗᲚᲔᲑᲐ"} pageNum={"3/3"} />
         <div className="w-[100%] h-fit bg-bgGray flex flex-col box-border font-hel pb-20 items-center">
           <div className="w-[72%] h-fit bg-bgGray flex flex-col">
             <Formik
               initialValues={{
-                firstName: "",
-                lastName: "",
-                photo: "",
-                personalInfo: "",
-                email: "",
-                number: "",
-                position: "",
-                employer: "",
-                startDate: "",
-                endDate: "",
-                jobDescription: "",
                 education: "",
-                position2: "",
-                employer2: "",
-                startDate2: "",
-                endDate2: "",
-                jobDescription2: "",
-                education2: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("submitted");
-                navigate("/page3");
+                // navigate("/page1");
                 alert("submitted");
               }}
             >
@@ -346,11 +335,11 @@ export default function Form2({ aa }) {
                     <div className="wrapper">
                       {InputElement(
                         "text",
-                        "position",
-                        "თანამდებობა",
+                        "education",
+                        "სასწავლებელი",
                         "მინიმუმ 2 სიმბოლო",
-                        errors.position,
-                        touched.position,
+                        errors.education,
+                        touched.education,
                         1
                       )}
                     </div>

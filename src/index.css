@@ -9,6 +9,21 @@
     src: local("HelveticaNeue"),
       url("./Fonts/HelveticaNeue.ttc") format("truetype");
   }
+  @font-face {
+    font-family: "HelveticaNeuBold";
+    src: local("HelveticaNeuBold"),
+      url("./Fonts/HelveticaNeuBold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "HelveticaNeueMedium";
+    src: local("HelveticaNeueMedium"),
+      url("./Fonts/HelveticaNeueMedium.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "HelveticaNeueLight";
+    src: local("HelveticaNeueLight"),
+      url("./Fonts/HelveticaNeueLight.ttf") format("truetype");
+  }
 }
 
 @layer components {

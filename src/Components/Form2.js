@@ -34,8 +34,8 @@ export default function Form2({ aa }) {
       .min(2, "Too Short!")
       .matches(nameRegex2, "ქართული ასოები")
       .required("Required"),
-    startDate: Yup.string().required("Required"),
-    endDate: Yup.string().required("Required"),
+    jobStartDate: Yup.string().required("Required"),
+    jobEndDate: Yup.string().required("Required"),
     jobDescription: Yup.string()
       .min(2, "Too Short!")
       .matches(nameRegex2, "ქართული ასოები")
@@ -309,22 +309,15 @@ export default function Form2({ aa }) {
                 number: "",
                 position: "",
                 employer: "",
-                startDate: "",
-                endDate: "",
+                jobStartDate: "",
+                jonEndDate: "",
                 jobDescription: "",
                 education: "",
-                position2: "",
-                employer2: "",
-                startDate2: "",
-                endDate2: "",
-                jobDescription2: "",
-                education2: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("submitted");
                 navigate("/page3");
-                alert("submitted");
               }}
             >
               {({
@@ -340,7 +333,7 @@ export default function Form2({ aa }) {
                   
                   
                   */}
-                  {/* {console.log(errors)} */}
+                  {console.log(errors)}
                   {/* {console.log(touched)} */}
                   <div className="wrapper">
                     <div className="wrapper">
@@ -349,6 +342,7 @@ export default function Form2({ aa }) {
                         "position",
                         "თანამდებობა",
                         "მინიმუმ 2 სიმბოლო",
+                        "დეველოპერი, დიზაინერი, ა.შ.",
                         errors.position,
                         touched.position,
                         1
@@ -360,6 +354,8 @@ export default function Form2({ aa }) {
                         "employer",
                         "დამსაქმებელი",
                         "მინიმუმ 2 სიმბოლო",
+                        "დამსაქმებელი",
+
                         errors.employer,
                         touched.employer,
                         1
@@ -368,18 +364,20 @@ export default function Form2({ aa }) {
                     <div className="wrapper">
                       {InputElement(
                         "date",
-                        "startDate",
+                        "jobStartDate",
                         "დაწყების რიცხვი",
                         "",
-                        errors.startDate,
-                        touched.startDate,
+                        "",
+                        errors.jobStartDate,
+                        touched.jobStartDate,
                         2,
                         "date",
-                        "endDate",
+                        "jobEndDate",
                         "დამთავრების რიცხვი",
                         "",
-                        errors.endDate,
-                        touched.endDate
+                        "",
+                        errors.jobEndDate,
+                        touched.jobEndDate
                       )}
                     </div>
                     <div className="wrapper ">
@@ -387,12 +385,15 @@ export default function Form2({ aa }) {
                         "jobDescription",
                         "აღწერა",
                         "",
+                        "როლი თანამდებობაზე და ზოგადი აღწერა",
                         errors.jobDescription,
                         touched.jobDescription,
                         values.jobDescription,
                         (e) => {
                           setFieldValue("jobDescription", e.target.value);
-                          setFieldTouched("jobDescription", true);
+                          setTimeout(function () {
+                            setFieldTouched("jobDescription", true);
+                          }, 100);
                         },
                         1
                       )}
@@ -431,7 +432,7 @@ export default function Form2({ aa }) {
                     <button
                       type="button"
                       onClick={submitForm}
-                      className="bg-sky-400"
+                      className="bg-sky-600"
                     >
                       Submit
                     </button>

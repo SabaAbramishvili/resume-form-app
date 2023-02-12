@@ -38,13 +38,9 @@ const SignupSchema = Yup.object().shape({
     .required("შეიყვანეთ"),
 });
 
-const AutoSubmitToken = () => {
-  const { values, submitForm } = useFormikContext();
-  useEffect(() => {}, [values, submitForm]);
-  return null;
-};
-
 //
+
+// console.log(document.querySelector("#photo").value);
 
 export default function Form1({ aa }) {
   const navigate = useNavigate();
@@ -71,11 +67,13 @@ export default function Form1({ aa }) {
                 number: "",
                 position: "",
                 employer: "",
-                startDate: "",
-                endDate: "",
+                jobStartDate: "",
+                jobEndDate: "",
                 jobDescription: "",
                 education: "",
-                experienceNumber: "",
+                degree: "",
+                eduEndDate: "",
+                eduDescription: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
@@ -121,6 +119,7 @@ export default function Form1({ aa }) {
                       "firstName",
                       "სახელი",
                       "მინიმუმ 2 ასო, ქართული ასოები",
+                      "ანზორ",
                       errors.firstName,
                       touched.firstName,
                       2,
@@ -128,6 +127,7 @@ export default function Form1({ aa }) {
                       "lastName",
                       "გვარი",
                       "მინიმუმ 2 ასო, ქართული ასოები",
+                      "მუმლაძე",
                       errors.lastName,
                       touched.lastName
                     )}
@@ -157,7 +157,13 @@ export default function Form1({ aa }) {
                           const reader = new FileReader();
                           reader.readAsDataURL(image);
                           reader.addEventListener("load", () => {
+                            localStorage.setItem(
+                              "img",
+                              document.querySelector("#photo").value
+                            );
                             localStorage.setItem("photo", reader.result);
+                            const dataUrl = reader.result;
+                            localStorage.setItem("myFile", dataUrl);
                             setFieldValue("photo", reader.result);
                           });
                         }}
@@ -170,6 +176,7 @@ export default function Form1({ aa }) {
                       "personalInfo",
                       "ჩემ შესახებ (არასავალდებულო)",
                       "",
+                      "ზოგადი ინფო შენ შესახებ",
                       errors.personalInfo,
                       touched.personalInfo,
                       values.personalInfo,
@@ -187,6 +194,7 @@ export default function Form1({ aa }) {
                       "email",
                       "ელ.ფოსტა",
                       "უნდა მთავრდებოდეს @redberry.ge-ით",
+                      "anzorr666@redberry.ge",
                       errors.email,
                       touched.email,
                       1
@@ -198,6 +206,7 @@ export default function Form1({ aa }) {
                       "number",
                       "მობილურის ნომერი",
                       "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს",
+                      "+995 551 12 34 56",
                       errors.number,
                       touched.number,
                       1

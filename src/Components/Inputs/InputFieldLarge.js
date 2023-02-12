@@ -17,6 +17,7 @@ export default function InputFieldLarge(props) {
       </p>
       <div className="flex w-[100%] flex-row items-center justify-end">
         <textarea
+          placeholder={props.placeholder}
           name={props.name}
           touched={props.touched}
           onChange={(e) => {

@@ -1,37 +1,38 @@
 import InputField from "./InputField";
 import InputFieldLarge from "./InputFieldLarge";
-const InputElementLarge = (
+import InputSelect from "./InputSelect";
+const InputSelectElement = (
   name,
   label,
   hint,
-  placeholder = "",
+  placeholder,
   errors,
   touched,
-  value,
-  SetValue,
+  values,
+  setValues,
+  options,
   num = 1,
-  type = "inputText",
+  required = true,
   name2 = "",
   label2 = "",
   hint2 = "",
   errors2 = "",
-  touched2 = "",
-  value2 = ""
+  touched2 = ""
 ) => {
   return (
-    <Field
-      type=""
+    <InputSelect
       name={name}
       label={label}
       hint={hint}
+      placeholder={placeholder}
       errors={errors}
       touched={touched}
-      value={value}
-      setValue={(e) => {
-        SetValue(e);
+      values={values}
+      setValues={(e) => {
+        setValues(e);
       }}
-      // value={value}
+      options={options}
     />
   );
 };
-export default InputElementLarge;
+export default InputSelectElement;

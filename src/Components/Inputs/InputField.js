@@ -20,6 +20,7 @@ export default function Inputs(props) {
         <Field
           type={props.type}
           name={props.name}
+          placeholder={props.placeholder}
           className={
             props.type === "text"
               ? props.errors && props.touched

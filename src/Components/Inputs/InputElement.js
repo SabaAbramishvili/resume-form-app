@@ -5,6 +5,7 @@ const InputElement = (
   name,
   label,
   hint,
+  placeholder,
   errors,
   touched,
   num = 1,
@@ -12,6 +13,7 @@ const InputElement = (
   name2 = "",
   label2 = "",
   hint2 = "",
+  placeholder2 = "",
   errors2 = "",
   touched2 = ""
 ) => {
@@ -21,16 +23,17 @@ const InputElement = (
         className={
           num === 1
             ? "flex flex-col laptop:w-[100%]"
-            : "flex flex-col laptop:w-[47%]"
+            : "flex flex-col  laptop:w-[47%]"
         }
       >
         <InputField
           type={type}
           name={name}
-          errors={errors}
-          touched={touched}
           label={label}
           hint={hint}
+          placeholder={placeholder}
+          errors={errors}
+          touched={touched}
         />
       </div>
       {num === 2 ? (
@@ -44,10 +47,11 @@ const InputElement = (
           <InputField
             type={type2}
             name={name2}
-            errors={errors2}
-            touched={touched2}
             label={label2}
             hint={hint2}
+            placeholder={placeholder2}
+            errors={errors2}
+            touched={touched2}
           />
         </div>
       ) : null}

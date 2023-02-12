@@ -4,6 +4,7 @@ const InputElementLarge = (
   name,
   label,
   hint,
+  placeholder = "",
   errors,
   touched,
   value,
@@ -21,6 +22,7 @@ const InputElementLarge = (
       name={name}
       label={label}
       hint={hint}
+      placeholder={placeholder}
       errors={errors}
       touched={touched}
       value={value}

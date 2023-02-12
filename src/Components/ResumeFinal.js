@@ -3,12 +3,21 @@ import isEqual from "react-fast-compare";
 import phoneicon from "./Images/phoneicon.svg";
 import emailicon from "./Images/emailicon.svg";
 
-export default function Resume({ changed }) {
+export default function ResumeFinal({ changed, Filledresponse }) {
   const [values1, setValues1] = useState("");
+  const [values2, setValues2] = useState("");
 
-  let i = changed();
+  //   let i = changed();
   // console.log(i);
-
+  console.log("response=====");
+  console.log(Filledresponse);
+  console.log(Filledresponse.length);
+  //   setValues1(Filledresponse);
+  useEffect(() => {
+    setValues2(Filledresponse);
+  }, [setValues1]);
+  console.log("values2");
+  console.log(values2);
   useEffect(() => {
     const savedForm = window.localStorage.getItem("page1");
     // console.log(savedForm);
@@ -17,7 +26,7 @@ export default function Resume({ changed }) {
       setValues1(parsedForm);
       // console.log("loaded");
     }
-  }, [i]);
+  }, []);
   // console.log(values1.photo);
   return (
     <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel ">

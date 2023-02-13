@@ -35,6 +35,15 @@ export default function ResumeFinal({ changed, Filledresponse }) {
   console.log("values2");
   console.log(values2);
   useEffect(() => {
+    setEducations(Filledresponse.educations);
+    setExperiences(Filledresponse.experiences);
+  }, []);
+  useEffect(() => {
+    setEducations(Filledresponse.educations);
+    setExperiences(Filledresponse.experiences);
+  }, [Filledresponse]);
+
+  useEffect(() => {
     const savedForm = window.localStorage.getItem("page1");
     // console.log(savedForm);
     if (!isEqual(savedForm, values1)) {
@@ -128,6 +137,9 @@ export default function ResumeFinal({ changed, Filledresponse }) {
         ));
       }
   }
+  console.log("eeeeeeeeeeeeeeee");
+  console.log(educations);
+  console.log(experiences);
 
   const getBack = () => {
     localStorage.clear();

@@ -112,7 +112,11 @@ export default function Resume({ changed, setExp, setEdu }) {
             <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
               {/* {educations.position + ", " + educations.employer} */}
               {educations.institute ? educations.institute + ", " : ""}
-              {educations.degree.label ? educations.degree.label : ""}
+              {educations.degree
+                ? educations.degree.label
+                  ? educations.degree.label
+                  : ""
+                : ""}
             </p>
             <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
               {educations.eduEndDate ? educations.eduEndDate : null}
@@ -287,7 +291,11 @@ export default function Resume({ changed, setExp, setEdu }) {
                         <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
                           {/* {values1.position + ", " + values1.employer} */}
                           {values1.institute ? values1.institute + ", " : ""}
-                          {values1.degree.label ? values1.degree.label : ""}
+                          {values1.degree
+                            ? values1.degree.label
+                              ? values1.degree.label
+                              : ""
+                            : ""}
                         </p>
                         <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
                           {values1.eduEndDate ? values1.eduEndDate : null}

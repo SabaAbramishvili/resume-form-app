@@ -27,12 +27,12 @@ export default function Form3({ aa, setResponse }) {
   const navigate = useNavigate();
 
   const SignupSchema = Yup.object().shape({
-    education: Yup.string()
+    institute: Yup.string()
       .min(2, "Too Short!")
       .matches(nameRegex2, "ქართული ასოები")
       .required("Required"),
     degree: Yup.object().required("Required"),
-    eduEndDate: Yup.string().required("Required"),
+    due_date: Yup.string().required("Required"),
     eduDescription: Yup.string().required("Required"),
 
     education2: Yup.string().when([], {
@@ -79,6 +79,16 @@ export default function Form3({ aa, setResponse }) {
   const [show, setShow] = useState(0);
   const [errors, setErrors] = useState("");
   const [formikValues, setFormikValues] = useState("");
+  const [state, setState] = useState({});
+  const [index, setIndex] = useState("");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const changeShow = () => {
     console.log("changeshow");
@@ -88,15 +98,16 @@ export default function Form3({ aa, setResponse }) {
   // console.log("vaaaaaaaaaaaaalll");
   // console.log(formikValues);
   // console.log("show = " + show);
+
   const changeFilled = (formikValues) => {
-    console.log("experienceNumber");
-    console.log(formikValues.experienceNumber);
-    if (show > formikValues.experienceNumber) {
-      formikValues.experienceNumber = show;
+    console.log("educationNumber");
+    console.log(formikValues.educationNumber);
+    if (show > formikValues.educationNumber) {
+      formikValues.educationNumber = show;
       console.log("showwwwwwwwshowwwwwwww");
-    } else if (formikValues.experienceNumber > 0) {
+    } else if (formikValues.educationNumber > 0) {
       console.log("exxxxxxxxxxxxxxxxxexxxxxxxxxxxxxxxxx");
-      setShow(formikValues.experienceNumber);
+      setShow(formikValues.educationNumber);
     }
   };
 
@@ -110,36 +121,6 @@ export default function Form3({ aa, setResponse }) {
     fetchData();
   }, []);
 
-  const cvData = {
-    name: "დავით",
-    surname: "ონიანი",
-    email: "davitoniani@redberry.ge",
-    phone_number: "+995598123456",
-    experiences: [
-      {
-        position: "back-end developer",
-        employer: "Redberry",
-        start_date: "2019/09/09",
-        due_date: "2020/09/23",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ornare nunc dui, a pellentesque magna blandit dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis diam nisi, at venenatis dolor aliquet vel. Pellentesque aliquet leo nec tortor pharetra, ac consectetur orci bibendum.",
-      },
-    ],
-    educations: [
-      {
-        institute: "თსუ",
-        degree: "სტუდენტი",
-        due_date: "2017/06/25",
-        description:
-          "სამართლის ფაკულტეტის მიზანი იყო მიგვეღო ფართო თეორიული ცოდნა სამართლის არსის, სისტემის, ძირითადი პრინციპების, სამართლებრივი სისტემების, ქართული სამართლის ისტორიული წყაროების, კერძო, სისხლის და საჯარო სამართლის სფეროების ძირითადი თეორიების, პრინციპებისა და რეგულირების თავისებურებების შესახებ.",
-      },
-    ],
-    // image: "/downloads/პირადი.png",
-    about_me: "ეს არის აღწერა ჩემს შესახებ",
-  };
-
-  console.log(cvData.image);
-
   useEffect(() => {
     const savedForm = window.localStorage.getItem("photo");
     if (savedForm) {
@@ -149,33 +130,30 @@ export default function Form3({ aa, setResponse }) {
     }
   }, [photo]);
 
-  // console.log(Object.keys(cvData));
-
   function dataUrlToBlob(dataUrl) {
-    const parts = dataUrl.split(";base64,");
-    const contentType = parts[0].split(":")[1];
-    const byteCharacters = atob(parts[1]);
-    const byteArrays = [];
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteArrays.push(byteCharacters.charCodeAt(i));
+    if (dataUrl) {
+      const parts = dataUrl.split(";base64,");
+      const contentType = parts[0].split(":")[1];
+      const byteCharacters = atob(parts[1]);
+      const byteArrays = [];
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteArrays.push(byteCharacters.charCodeAt(i));
+      }
+      const byteArray = new Uint8Array(byteArrays);
+      return new Blob([byteArray], { type: contentType });
     }
-    const byteArray = new Uint8Array(byteArrays);
-    return new Blob([byteArray], { type: contentType });
   }
 
   const dataUrl = localStorage.getItem("photo");
   const blob = dataUrlToBlob(dataUrl);
   const file1 = new File([blob], "photo", { type: "image/png" });
-  cvData.image = file1;
-  // console.log("file1");
-  // console.log(cvData);
 
   const formData = new FormData();
   function fillData() {
     console.log("filllllllllllllll");
     let phone_number;
     if (formikValues.number != undefined) {
-      phone_number = formikValues.number.replace(/\s/g, "");
+      phone_number = formikValues.phone_number.replace(/\s/g, "");
     }
     formData.append("name", formikValues.firstName);
     formData.append("surname", formikValues.lastName);
@@ -207,12 +185,8 @@ export default function Form3({ aa, setResponse }) {
   }
 
   // console.log(photo);
-  // console.log(cvData);
-  // console.log(cvData.image);
-  //
 
   //
-  cvData.image = file1;
 
   const filledArray = new Array(user.length);
   for (let index = 0; index < user.length; index++) {
@@ -224,7 +198,6 @@ export default function Form3({ aa, setResponse }) {
 
   function post() {
     console.log("dataaaaaaaaa");
-    console.log(cvData);
     fetch("https://resume.redberryinternship.ge/api/cvs", {
       method: "POST",
       // headers: {
@@ -256,32 +229,48 @@ export default function Form3({ aa, setResponse }) {
     navigate("/ResumeFinal");
   }
 
-  const newForm2 = (sub) => {
+  const NewForm2 = (index) => {
+    const SignupSchema3 = Yup.object().shape({
+      institute: Yup.string()
+        .min(2, "Too Short!")
+        .matches(nameRegex2, "ქართული ასოები")
+        .required("Required"),
+      degree: Yup.object().required("Required"),
+      due_date: Yup.string().required("Required"),
+      eduDescription: Yup.string().required("Required"),
+
+      education2: Yup.string().when([], {
+        is: () => filled && true,
+        then: Yup.string()
+          .min(2, "Too Short!")
+          .required("Passphrase is required"),
+        otherwise: Yup.string().notRequired(),
+      }),
+    });
+
     function stuff(formikValues) {
       // console.log(formikValues);
       changeFilled(formikValues);
       aa(0);
     }
-    // const [show, setShow] = useState();
-    // const changeShow = () => {
-    //   console.log("changeshow");
-    //   show ? setShow(false) : setShow(true);
-    // };
+    // console.log("indexxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    // console.log(index);
+
     return (
       <Formik
-        initialValues={{
-          position: "",
-          employer: "",
-          startDate: "",
-          endDate: "",
-          jobDescription: "",
-          experienceNumber: "",
-        }}
-        validationSchema={SignupSchema2}
+        initialValues={
+          {
+            // institute: "",
+            // degree: "",
+            // due_date: "",
+            // eduDescription: "",
+          }
+        }
+        validationSchema={SignupSchema3}
         onSubmit={(values) => {
           console.log("submitted");
           alert("submitted");
-          // navigate("/ResumeFinal");
+          // navigate("/page1");
         }}
       >
         {({
@@ -294,105 +283,93 @@ export default function Form3({ aa, setResponse }) {
         }) => (
           <Form
             onChange={() => {
+              Object.values(values).every((x) => x === null || x === "")
+                ? setErrors({ [index]: null })
+                : setErrors({ [index]: errors });
               // Object.values(values).every((x) => x === null || x === "")
               //   ? setErrors(null)
               //   : setErrors(errors);
               Object.values(values).every((x) => x === null || x === "")
-                ? setFieldValue("experienceNumber", show)
-                : setFieldValue("experienceNumber", show);
+                ? setFieldValue("educationNumber", show)
+                : setFieldValue("educationNumber", show);
             }}
             onBlur={() => {
               Object.values(values).every((x) => x === null || x === "")
-                ? setErrors(null)
-                : setErrors(errors);
+                ? setErrors({ [index]: null })
+                : setErrors({ [index]: errors });
             }}
           >
-            {Object.values(values).every((x) => x === null || x === "") ||
-            show === "false"
-              ? console.log("empty")
-              : console.log("not empty")}
+            <div className="wrapper">
+              <div className="wrapper">
+                {InputElement(
+                  "text",
+                  "institute",
+                  "სასწავლებელი",
+                  "მინიმუმ 2 სიმბოლო",
+                  "სასწავლებელი",
+                  errors.institute,
+                  touched.institute,
+                  1
+                )}
+              </div>
 
-            <div
-              // className={
-              //   show
-              //     ? "wrapper"
-              //     : Object.values(values).every((x) => x === null || x === "")
-              //     ? "hidden"
-              //     : "wrapper"
-              // }
-              className="wrapper"
-            >
-              <div className="wrapper">
-                {InputElement(
-                  "text",
-                  // "experince" + show + ".position",
-                  "position",
-                  "თანამდებობა",
-                  "მინიმუმ 2 სიმბოლო",
-                  errors.position,
-                  touched.position,
-                  1
-                )}
+              <div className="wrapper flex-col laptop:flex-row justify-between ">
+                <div className="wrapper laptop:w-[47%] w-[100%]">
+                  {InputSelectElement(
+                    "degree",
+                    "აღწერა",
+                    "",
+                    "სასწავლებელი",
+                    errors.degree,
+                    touched.degree,
+                    values.degree,
+                    (e) => {
+                      console.log(e.label);
+                      setFieldValue("degree", e).then(console.log(e));
+                      setTimeout(function () {
+                        setFieldTouched("degree", true);
+                      }, 100);
+
+                      // (setFieldTouched("degree", true));
+                    },
+                    filledArray
+                  )}
+                </div>
+                <div className="wrapper laptop:w-[47%] w-[100%]">
+                  {InputElement(
+                    "date",
+                    "due_date",
+                    "დაწყების რიცხვი",
+                    "",
+                    "",
+                    errors.due_date,
+                    touched.due_date,
+                    1
+                  )}
+                </div>
               </div>
-              <div className="wrapper">
-                {InputElement(
-                  "text",
-                  // "experince" + show + ".employer",
-                  "employer",
-                  "დამსაქმებელი",
-                  "მინიმუმ 2 სიმბოლო",
-                  errors.employer,
-                  touched.employer,
-                  1
-                )}
-              </div>
-              <div className="wrapper">
-                {InputElement(
-                  "date",
-                  "startDate",
-                  "დაწყების რიცხვი",
-                  "",
-                  errors.startDate,
-                  touched.startDate,
-                  2,
-                  "date",
-                  "endDate",
-                  "დამთავრების რიცხვი",
-                  "",
-                  errors.endDate,
-                  touched.endDate
-                )}
-              </div>
+
               <div className="wrapper ">
                 {InputElementLarge(
-                  "jobDescription",
+                  "eduDescription",
                   "აღწერა",
                   "",
-                  errors.jobDescription,
-                  touched.jobDescription,
-                  values.jobDescription,
+                  "განათლების აღწერა",
+                  errors.eduDescription,
+                  touched.eduDescription,
+                  values.eduDescription,
                   (e) => {
-                    setFieldValue("jobDescription", e.target.value);
-                    setFieldTouched("jobDescription", true);
+                    setFieldValue("eduDescription", e.target.value);
+                    setTimeout(function () {
+                      setFieldTouched("eduDescription", true);
+                    }, 100);
                   },
                   1
                 )}
               </div>
-              {/* {console.log(values)} */}
-              <button
-                type="button"
-                onClick={() => {
-                  Object.values(values).every((x) => x === null || x === "")
-                    ? setErrors(null)
-                    : setErrors(errors);
-                }}
-                className="bg-fuchsia-600"
-              >
-                eee
-              </button>
             </div>
             <FormikPersist
-              name={"experience" + show}
+              name={"educations" + index}
               // name={"experience"}
               doit={(e) => {
                 stuff(e);
@@ -407,10 +384,41 @@ export default function Form3({ aa, setResponse }) {
   function createNewForms(show) {
     for (let index = 0; index < show; index++) {
       console.log(index);
-      return [...Array(show)].map((e, i) => <div>{newForm2({ func })}</div>);
+      let i = index;
+      return [...Array(show)].map((e, i) => <div>{NewForm2(i)}</div>);
       // console.log("arrr");
       // console.log([...Array(show)]);
     }
+  }
+  function submit() {
+    console.log("Eeeeeeee");
+    // console.log(Object.keys(state));
+    let valid = true;
+    Object.keys(state).forEach((element) => {
+      let val1;
+      if (state[element]) {
+        val1 = state[element];
+        let val2;
+        if (state[element][element]) val2 = val1[element];
+
+        if (
+          JSON.stringify(val2) === "{}" ||
+          val2 === undefined ||
+          val2 === ""
+        ) {
+          console.log("validdddddddddddd");
+        } else {
+          valid = false;
+          console.log("not validdddd");
+        }
+      }
+    });
+    console.log(valid);
+    if (valid) {
+      navigate("/page3");
+    }
+
+    alert("Aaaaaaaaa");
   }
 
   return (
@@ -421,14 +429,15 @@ export default function Form3({ aa, setResponse }) {
           <div className="w-[72%] h-fit bg-bgGray flex flex-col">
             <Formik
               initialValues={{
-                education: "",
+                institute: "",
                 degree: "",
-                eduEndDate: "",
+                due_date: "",
                 eduDescription: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("submitted");
+                alert("Aaaaaa");
                 // navigate("/page1");
                 // post();
                 fillData();
@@ -455,12 +464,12 @@ export default function Form3({ aa, setResponse }) {
                     <div className="wrapper">
                       {InputElement(
                         "text",
-                        "education",
+                        "institute",
                         "სასწავლებელი",
                         "მინიმუმ 2 სიმბოლო",
                         "სასწავლებელი",
-                        errors.education,
-                        touched.education,
+                        errors.institute,
+                        touched.institute,
                         1
                       )}
                     </div>
@@ -476,7 +485,6 @@ export default function Form3({ aa, setResponse }) {
                           touched.degree,
                           values.degree,
                           (e) => {
-                            console.log(e.label);
                             setFieldValue("degree", e).then(console.log(e));
                             setTimeout(function () {
                               setFieldTouched("degree", true);
@@ -490,16 +498,17 @@ export default function Form3({ aa, setResponse }) {
                       <div className="wrapper laptop:w-[47%] w-[100%]">
                         {InputElement(
                           "date",
-                          "eduEndDate",
+                          "due_date",
                           "დაწყების რიცხვი",
                           "",
                           "",
-                          errors.eduEndDate,
-                          touched.eduEndDate,
+                          errors.due_date,
+                          touched.due_date,
                           1
                         )}
                       </div>
                     </div>
+                    {console.log(errors)}
 
                     <div className="wrapper ">
                       {InputElementLarge(
@@ -545,15 +554,31 @@ export default function Form3({ aa, setResponse }) {
 
                     <button
                       type="button"
-                      onClick={() => changeShow()}
-                      className="bg-sky-300"
+                      onClick={
+                        () => {
+                          setShow(show + 1);
+                          console.log(values);
+                          setFieldValue("educationNumber", show + 1);
+                          setFieldValue("institute", values.institute);
+                          setFieldTouched("institute", true);
+                          window.localStorage.setItem(
+                            "page1",
+                            JSON.stringify(values)
+                          );
+                        }
+
+                        // changeShow().then(
+                        //   setFieldValue("experienceNumber", show)
+                        // )
+                      }
+                      className="bg-sky-800"
                     >
                       kidoo
                     </button>
                     <button
                       type="button"
                       onClick={submitForm}
-                      className="bg-sky-400"
+                      className="bg-sky-600"
                     >
                       Submit
                     </button>

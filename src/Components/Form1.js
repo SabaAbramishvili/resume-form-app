@@ -18,11 +18,11 @@ const numRegex = /^([+]?\d{3}[-\s]?|)\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
 const mailRegex = /^[a-z0-9_-]{1,}@(redberry)\.ge/;
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string()
+  name: Yup.string()
     .min(2, "Too Short!")
     .matches(nameRegex, "ქართული ასოები")
     .required("Required"),
-  lastName: Yup.string()
+  surname: Yup.string()
     .min(2, "Too Short!")
     .matches(nameRegex, "ქართული ასოები")
     .required("Required"),
@@ -30,10 +30,7 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .matches(mailRegex, "უნდა მთავრდებოდეს @redberry.ge-ით")
     .required("Required"),
-  email: Yup.string()
-    .matches(mailRegex, "უნდა მთავრდებოდეს @redberry.ge-ით")
-    .required("Required"),
-  number: Yup.string()
+  phone_number: Yup.string()
     .matches(numRegex, "უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს")
     .required("შეიყვანეთ"),
 });
@@ -59,12 +56,12 @@ export default function Form1({ aa }) {
             */}
             <Formik
               initialValues={{
-                firstName: "",
-                lastName: "",
+                name: "",
+                surname: "",
                 photo: "",
-                personalInfo: "",
+                about_me: "",
                 email: "",
-                number: "",
+                phone_number: "",
                 position: "",
                 employer: "",
                 jobStartDate: "",
@@ -74,6 +71,8 @@ export default function Form1({ aa }) {
                 degree: "",
                 eduEndDate: "",
                 eduDescription: "",
+                experienceNumber: 0,
+                educationNumber: 0,
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
@@ -94,42 +93,22 @@ export default function Form1({ aa }) {
             */}
 
                   <div className="wrapper ">
-                    {/* <div className="flex justify-between flex-col laptop:flex-row  ">
-                      <div className="flex  flex-col laptop:w-[47%]">
-                        <InputField
-                          name={"firstName"}
-                          errors={errors.firstName}
-                          touched={touched.firstName}
-                          label={"სახელი"}
-                          hint={"მინიმუმ 2 ასო, ქართული ასოები"}
-                        />
-                      </div>
-                      <div className="flex  flex-col laptop:w-[47%]">
-                        <InputField
-                          name={"lastName"}
-                          errors={errors.lastName}
-                          touched={touched.lastName}
-                          label={"გვარი"}
-                          hint={"მინიმუმ 2 ასო, ქართული ასოები"}
-                        />
-                      </div>
-                    </div> */}
                     {InputElement(
                       "text",
-                      "firstName",
+                      "name",
                       "სახელი",
                       "მინიმუმ 2 ასო, ქართული ასოები",
                       "ანზორ",
-                      errors.firstName,
-                      touched.firstName,
+                      errors.name,
+                      touched.name,
                       2,
                       "text",
-                      "lastName",
+                      "surname",
                       "გვარი",
                       "მინიმუმ 2 ასო, ქართული ასოები",
                       "მუმლაძე",
-                      errors.lastName,
-                      touched.lastName
+                      errors.surname,
+                      touched.surname
                     )}
                   </div>
                   <div className="mb-12 flex flex-row">
@@ -173,16 +152,16 @@ export default function Form1({ aa }) {
 
                   <div className="wrapper ">
                     {InputElementLarge(
-                      "personalInfo",
+                      "about_me",
                       "ჩემ შესახებ (არასავალდებულო)",
                       "",
                       "ზოგადი ინფო შენ შესახებ",
-                      errors.personalInfo,
-                      touched.personalInfo,
-                      values.personalInfo,
+                      errors.about_me,
+                      touched.about_me,
+                      values.about_me,
                       (e) => {
-                        setFieldValue("personalInfo", e.target.value);
-                        setFieldTouched("personalInfo", true);
+                        setFieldValue("about_me", e.target.value);
+                        setFieldTouched("about_me", true);
                       },
                       1,
                       "required"
@@ -203,12 +182,12 @@ export default function Form1({ aa }) {
                   <div className="wrapper">
                     {InputElement(
                       "text",
-                      "number",
+                      "phone_number",
                       "მობილურის ნომერი",
                       "უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს",
                       "+995 551 12 34 56",
-                      errors.number,
-                      touched.number,
+                      errors.phone_number,
+                      touched.phone_number,
                       1
                     )}
                   </div>

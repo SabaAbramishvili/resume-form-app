@@ -24,6 +24,9 @@ const mailRegex = /^[a-z0-9_-]{1,}@(redberry)\.ge/;
 
 export default function Form2({ aa }) {
   const navigate = useNavigate();
+  console.log(
+    "''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''"
+  );
 
   const SignupSchema = Yup.object().shape({
     position: Yup.string()
@@ -80,10 +83,61 @@ export default function Form2({ aa }) {
   const [user, setUser] = useState([]);
   const [filled, setFilled] = useState(false);
   const [show, setShow] = useState(0);
-  const [errors, setErrors] = useState("");
-  // console.log(filled);
-  // console.log("errors = ");
-  // console.log(errors);
+  const [errors, setErrors] = useState();
+  const [errors2, setErrors2] = useState();
+  const [allErrors, setAllErrors] = useState("");
+  const [index, setIndex] = useState("");
+  const [myArray, updateMyArray] = useState([]);
+  // const [num, setNum] = useState("");
+  const [state, setState] = useState({});
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // console.log(state);
+
+  console.log("form2errors = ");
+  let err;
+  if (errors != undefined) {
+    let num = Object.keys(errors);
+    err = errors2;
+    err = { [num]: errors[num] };
+    Object.keys(errors).forEach((key) => {
+      console.log(key, errors[key]);
+    });
+  }
+  console.log(index);
+  console.log(err);
+  console.log(errors);
+  // err.push(errors);
+  useEffect(() => {
+    console.log(
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssss"
+    );
+    setState((prevState) => ({
+      ...prevState,
+      num: errors,
+    }));
+  }, [setErrors]);
+
+  if (errors != errors2) {
+    let num = Object.keys(errors);
+
+    console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+    console.log(num);
+    setState((prevState) => ({
+      ...prevState,
+      [num]: errors,
+    }));
+
+    setErrors2(errors);
+  }
+  console.log("state");
+  console.log(state);
 
   const changeShow = () => {
     console.log("changeshow");
@@ -91,13 +145,6 @@ export default function Form2({ aa }) {
     setShow(show + 1);
   };
 
-  // const changeShow = () => {
-  //   console.log("changeshow");
-  //   show ? setShow(false) : setShow(true);
-  // };
-  // const changeShow = () => {
-  //   show ? setShow(false) : setShow(true);
-  // };
   console.log("show = " + show);
   const changeFilled = (formikValues) => {
     console.log("experienceNumber");
@@ -134,28 +181,52 @@ export default function Form2({ aa }) {
   const func = () => {
     console.log("subbbbbbbbbbb");
   };
-  const newForm2 = (sub) => {
+  const NewForm2 = (index) => {
+    const SignupSchema3 = Yup.object().shape({
+      position: Yup.string()
+        .min(2, "Too Short!")
+        .matches(nameRegex2, "ქართული ასოები")
+        .required("Required"),
+      employer: Yup.string()
+        .min(2, "Too Short!")
+        .matches(nameRegex2, "ქართული ასოები")
+        .required("Required"),
+      jobStartDate: Yup.string().required("Required"),
+      jobEndDate: Yup.string().required("Required"),
+      jobDescription: Yup.string()
+        .min(2, "Too Short!")
+        .matches(nameRegex2, "ქართული ასოები")
+        .required("Required"),
+      education: Yup.string().when([], {
+        is: () => filled && true,
+        then: Yup.string()
+          .min(2, "Too Short!")
+          .required("Passphrase is required"),
+        otherwise: Yup.string().notRequired(),
+      }),
+    });
+
     function stuff(formikValues) {
       // console.log(formikValues);
       changeFilled(formikValues);
       aa(0);
     }
-    // const [show, setShow] = useState();
-    // const changeShow = () => {
-    //   console.log("changeshow");
-    //   show ? setShow(false) : setShow(true);
-    // };
+    // console.log("indexxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    // console.log(index);
+
     return (
       <Formik
-        initialValues={{
-          position: "",
-          employer: "",
-          startDate: "",
-          endDate: "",
-          jobDescription: "",
-          experienceNumber: "",
-        }}
-        validationSchema={SignupSchema2}
+        initialValues={
+          {
+            // position: "",
+            // employer: "",
+            // startDate: "",
+            // endDate: "",
+            // jobDescription: "",
+            // experienceNumber: "",
+          }
+        }
+        validationSchema={SignupSchema3}
         onSubmit={(values) => {
           console.log("submitted");
           alert("submitted");
@@ -172,6 +243,9 @@ export default function Form2({ aa }) {
         }) => (
           <Form
             onChange={() => {
+              Object.values(values).every((x) => x === null || x === "")
+                ? setErrors({ [index]: null })
+                : setErrors({ [index]: errors });
               // Object.values(values).every((x) => x === null || x === "")
               //   ? setErrors(null)
               //   : setErrors(errors);
@@ -181,32 +255,29 @@ export default function Form2({ aa }) {
             }}
             onBlur={() => {
               Object.values(values).every((x) => x === null || x === "")
-                ? setErrors(null)
-                : setErrors(errors);
+                ? setErrors({ [index]: null })
+                : setErrors({ [index]: errors });
+              // Object.values(values).every((x) => x === null || x === "")
+              //   ? setErrors(null)
+              //   : setErrors(errors);
             }}
           >
-            {Object.values(values).every((x) => x === null || x === "") ||
+            {/* {Object.values(values).every((x) => x === null || x === "") ||
             show === "false"
               ? console.log("empty")
-              : console.log("not empty")}
+              : console.log("not empty")} */}
 
-            <div
-              // className={
-              //   show
-              //     ? "wrapper"
-              //     : Object.values(values).every((x) => x === null || x === "")
-              //     ? "hidden"
-              //     : "wrapper"
-              // }
-              className="wrapper"
-            >
+            {/* {console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")} */}
+            {/* {console.log(errors)} */}
+
+            <div className="wrapper">
               <div className="wrapper">
                 {InputElement(
                   "text",
-                  // "experince" + show + ".position",
                   "position",
                   "თანამდებობა",
                   "მინიმუმ 2 სიმბოლო",
+                  "დეველოპერი, დიზაინერი, ა.შ.",
                   errors.position,
                   touched.position,
                   1
@@ -215,10 +286,10 @@ export default function Form2({ aa }) {
               <div className="wrapper">
                 {InputElement(
                   "text",
-                  // "experince" + show + ".employer",
                   "employer",
                   "დამსაქმებელი",
                   "მინიმუმ 2 სიმბოლო",
+                  "დამსაქმებელი",
                   errors.employer,
                   touched.employer,
                   1
@@ -227,24 +298,27 @@ export default function Form2({ aa }) {
               <div className="wrapper">
                 {InputElement(
                   "date",
-                  "startDate",
+                  "jobStartDate",
                   "დაწყების რიცხვი",
                   "",
-                  errors.startDate,
-                  touched.startDate,
+                  "",
+                  errors.jobStartDate,
+                  touched.jobStartDate,
                   2,
                   "date",
-                  "endDate",
+                  "jobEndDate",
                   "დამთავრების რიცხვი",
                   "",
-                  errors.endDate,
-                  touched.endDate
+                  "",
+                  errors.jobEndDate,
+                  touched.jobEndDate
                 )}
               </div>
               <div className="wrapper ">
                 {InputElementLarge(
                   "jobDescription",
                   "აღწერა",
+                  "",
                   "",
                   errors.jobDescription,
                   touched.jobDescription,
@@ -259,18 +333,19 @@ export default function Form2({ aa }) {
               {/* {console.log(values)} */}
               <button
                 type="button"
-                onClick={() => {
-                  Object.values(values).every((x) => x === null || x === "")
-                    ? setErrors(null)
-                    : setErrors(errors);
-                }}
+                // onClick={() => {
+                //   Object.values(values).every((x) => x === null || x === "")
+                //     ? setErrors(null)
+                //     : setErrors(errors);
+                // }}
+                onClick={submitForm}
                 className="bg-fuchsia-600"
               >
                 eee
               </button>
             </div>
             <FormikPersist
-              name={"experience" + show}
+              name={"experiences" + index}
               // name={"experience"}
               doit={(e) => {
                 stuff(e);
@@ -285,13 +360,52 @@ export default function Form2({ aa }) {
   function createNewForms(show) {
     for (let index = 0; index < show; index++) {
       console.log(index);
-      return [...Array(show)].map((e, i) => <div>{newForm2({ func })}</div>);
-      // console.log("arrr");
-      // console.log([...Array(show)]);
+      let i = index;
+      return [...Array(show)].map((e, i) => <div>{NewForm2(i)}</div>);
     }
   }
 
-  // console.log("show = " + show);
+  function submit() {
+    console.log("Eeeeeeee");
+    // console.log(Object.keys(state));
+    let valid = true;
+    Object.keys(state).forEach((element) => {
+      let val1;
+      if (state[element]) {
+        val1 = state[element];
+        let val2;
+        if (state[element][element]) val2 = val1[element];
+
+        if (
+          JSON.stringify(val2) === "{}" ||
+          val2 === undefined ||
+          val2 === ""
+        ) {
+          console.log("validdddddddddddd");
+        } else {
+          valid = false;
+          console.log("not validdddd");
+        }
+      }
+      // if (
+      //   JSON.stringify(state[element][element]) === "{}" ||
+      //   state[element][element] === undefined ||
+      //   state[element][element] === ""
+      // ) {
+      //   console.log("validdddddddddddd");
+      // } else {
+      //   valid = false;
+      //   console.log("not validdddd");
+      // }
+      // console.log(state[element][element]);
+    });
+    console.log(valid);
+    if (valid) {
+      navigate("/page3");
+    }
+
+    alert("Aaaaaaaaa");
+  }
 
   return (
     <>
@@ -306,18 +420,20 @@ export default function Form2({ aa }) {
                 photo: "",
                 personalInfo: "",
                 email: "",
-                number: "",
+                phone_number: "",
                 position: "",
                 employer: "",
                 jobStartDate: "",
-                jonEndDate: "",
+                jobEndDate: "",
                 jobDescription: "",
                 education: "",
               }}
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("submitted");
-                navigate("/page3");
+                // navigate("/page3");
+                // alert("submitted");
+                submit();
               }}
             >
               {({
@@ -333,7 +449,7 @@ export default function Form2({ aa }) {
                   
                   
                   */}
-                  {console.log(errors)}
+                  {/* {console.log(errors)} */}
                   {/* {console.log(touched)} */}
                   <div className="wrapper">
                     <div className="wrapper">
@@ -410,7 +526,7 @@ export default function Form2({ aa }) {
                   <div className={"wrapper"}>
                     {
                       createNewForms(show)
-                      // newForm2()
+                      // NewForm2()
                     }
                   </div>
                   <div className="wrapper flex-row justify-between">
@@ -424,8 +540,24 @@ export default function Form2({ aa }) {
 
                     <button
                       type="button"
-                      onClick={() => changeShow()}
-                      className="bg-sky-300"
+                      onClick={
+                        () => {
+                          setShow(show + 1);
+                          console.log(values);
+                          setFieldValue("experienceNumber", show + 1);
+                          setFieldValue("position", values.position);
+                          setFieldTouched("position", true);
+                          window.localStorage.setItem(
+                            "page1",
+                            JSON.stringify(values)
+                          );
+                        }
+
+                        // changeShow().then(
+                        //   setFieldValue("experienceNumber", show)
+                        // )
+                      }
+                      className="bg-sky-800"
                     >
                       kidoo
                     </button>

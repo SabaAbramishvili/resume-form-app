@@ -5,6 +5,8 @@ import emailicon from "./Images/emailicon.svg";
 
 export default function Resume({ changed }) {
   const [values1, setValues1] = useState("");
+  const [expNum, setExpNum] = useState("");
+  const [experiences, setExperiences] = useState("");
 
   let i = changed();
   // console.log(i);
@@ -15,12 +17,38 @@ export default function Resume({ changed }) {
     if (!isEqual(savedForm, values1)) {
       const parsedForm = JSON.parse(savedForm);
       setValues1(parsedForm);
+
+      if (values1) setExpNum(values1.experienceNumber);
+
       // console.log("loaded");
     }
   }, [i]);
+  console.log("Aaa");
+  console.log(expNum);
+
+  useEffect(() => {
+    if (typeof expNum === "number") {
+      let arr = [];
+      for (let index = 0; index < expNum; index++) {
+        let name = "experiences" + index;
+        const savedForm = window.localStorage.getItem(name);
+        const parsedForm = JSON.parse(savedForm);
+        console.log(parsedForm);
+        arr[index] = parsedForm;
+        console.log("=============");
+        console.log(index);
+      }
+      // console.log(arr);
+      setExperiences(arr);
+    }
+  }, [i]);
+  if (expNum > 1) console.log("ressssssssss");
+  console.log("experiences");
+  console.log(experiences);
+
   // console.log(values1.photo);
   return (
-    <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel ">
+    <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel break-all ">
       <div className="w-[8.5%]"></div>
       {/* {console.log(values1)} */}
       <div className="w-[83%] h-fit  flex flex-col mt-[74px] pb-20">
@@ -30,8 +58,8 @@ export default function Resume({ changed }) {
               <div className="flex w-[62%] h-fit flex-col ">
                 <div className="wrapper min-h-[36px]">
                   <p className="text-3xl font-extrabold text-orangeText">
-                    {values1.firstName ? values1.firstName + " " : null}
-                    {values1.lastName ? values1.lastName : null}
+                    {values1.name ? values1.name + " " : null}
+                    {values1.surname ? values1.surname : null}
                   </p>
                 </div>
                 <div className="wrapper min-h-[74px]">
@@ -51,7 +79,7 @@ export default function Resume({ changed }) {
                     ) : null}
                   </div>
                   <div className="flex flex-row">
-                    {values1.number ? (
+                    {values1.phone_number ? (
                       <>
                         <img
                           src={phoneicon}
@@ -60,20 +88,20 @@ export default function Resume({ changed }) {
                         ></img>
 
                         <p className="text-lg  font-medium  text-black mb-1   ">
-                          {values1.number}
+                          {values1.phone_number}
                         </p>
                       </>
                     ) : null}
                   </div>
                 </div>
                 <div className="wrapper h-fit mb-0">
-                  {values1.personalInfo ? (
+                  {values1.about_me ? (
                     <>
                       <p className="text-lg h-fit font-bold text-orangeText mb-4">
                         {"ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"}
                       </p>
                       <p className=" text-black h-fit w-[100%] text-[16px] font-medium leading-5 mb-3 ">
-                        {values1.personalInfo}
+                        {values1.about_me}
                       </p>
                     </>
                   ) : null}
@@ -91,8 +119,8 @@ export default function Resume({ changed }) {
                 </div>
               </div>
             </div>
-            {values1.firstName &&
-            values1.lastName &&
+            {values1.name &&
+            values1.surname &&
             values1.photo &&
             values1.photo &&
             values1.photo ? (
@@ -138,7 +166,9 @@ export default function Resume({ changed }) {
             </div>
           </div>
         ) : null}
+        <button onClick={() => console.log("mmmm")}>aaa</button>
       </div>
+
       <div className="w-[8.5%]"></div>
     </div>
   );

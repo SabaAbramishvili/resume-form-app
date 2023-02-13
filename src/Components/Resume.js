@@ -157,10 +157,10 @@ export default function Resume({ changed, setExp, setEdu }) {
 
   // console.log(values1.photo);
   return (
-    <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel break-words ">
+    <div className="w-[100%] tablet:w-[42%]  h-fit min-h-[980px] bg-white flex flex-row  justify-left box-border font-hel break-words ">
       <div className="w-[8.5%]"></div>
       {/* {console.log(values1)} */}
-      <div className="w-[83%] h-fit  flex flex-col mt-[74px] pb-10 ">
+      <div className="w-[83%] h-100%  flex flex-col mt-[74px] pb-10 justify-between ">
         {values1 ? (
           <div className="w-[100%] h-fit  flex flex-col ">
             <div className="flex w-[100%] h-fit flex-row mb-3">
@@ -304,7 +304,11 @@ export default function Resume({ changed, setExp, setEdu }) {
             </div>
           </div>
         ) : null}
-        <img src={logoicon} alt="" className={"w-[42px] h-[42px] mt-40 "}></img>
+        <img
+          src={logoicon}
+          alt=""
+          className={"w-[42px] h-[42px]   flex  items-end"}
+        ></img>
       </div>
 
       <div className="w-[8.5%]"></div>

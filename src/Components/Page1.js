@@ -12,11 +12,13 @@ export default function Page1({ aa }) {
     let i = value + 1;
     setValue(i);
   }
+  const setExp = (exp) => {};
+  const setEdu = (edu) => {};
   // console.log(value);
   return (
     <div className="h-fit flex flex-col justify-between tablet:flex-row bg-bgGray">
       <Form1 aa={(e) => stuff(e)} />
-      <Resume changed={changed} />
+      <Resume changed={changed} setExp={setExp} setEdu={setEdu} />
     </div>
   );
 }

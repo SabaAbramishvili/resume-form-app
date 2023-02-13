@@ -23,8 +23,12 @@ const numRegex3 =
 const numRegex = /^([+]?\d{3}[-\s]?|)\d{3}[-\s]?\d{2}[-\s]?\d{2}[-\s]?\d{2}$/;
 const mailRegex = /^[a-z0-9_-]{1,}@(redberry)\.ge/;
 
-export default function Form3({ aa, setResponse }) {
+export default function Form3({ aa, setResponse, experiences, educations }) {
   const navigate = useNavigate();
+  console.log("''''''''''''''''''''''''''''''''''''''");
+  console.log(experiences);
+  console.log(educations);
+  // console.log(educations[0].degree.value);
 
   const SignupSchema = Yup.object().shape({
     institute: Yup.string()
@@ -32,7 +36,7 @@ export default function Form3({ aa, setResponse }) {
       .matches(nameRegex2, "ქართული ასოები")
       .required("Required"),
     degree: Yup.object().required("Required"),
-    due_date: Yup.string().required("Required"),
+    eduEndDate: Yup.string().required("Required"),
     eduDescription: Yup.string().required("Required"),
 
     education2: Yup.string().when([], {
@@ -152,13 +156,13 @@ export default function Form3({ aa, setResponse }) {
   function fillData() {
     console.log("filllllllllllllll");
     let phone_number;
-    if (formikValues.number != undefined) {
+    if (formikValues.phone_number != undefined) {
       phone_number = formikValues.phone_number.replace(/\s/g, "");
     }
-    formData.append("name", formikValues.firstName);
-    formData.append("surname", formikValues.lastName);
+    formData.append("name", formikValues.name);
+    formData.append("surname", formikValues.surname);
     formData.append("email", formikValues.email);
-    formData.append("about_me", formikValues.personalInfo);
+    formData.append("about_me", formikValues.about_me);
     formData.append("phone_number", phone_number);
     formData.append("image", file1);
     formData.append("experiences[0][position]", formikValues.position);
@@ -166,21 +170,68 @@ export default function Form3({ aa, setResponse }) {
     formData.append("experiences[0][start_date]", formikValues.jobStartDate);
     formData.append("experiences[0][due_date]", formikValues.jobEndDate);
     formData.append("experiences[0][description]", formikValues.jobDescription);
-    //
-    formData.append("educations[0][institute]", formikValues.education);
 
     if (formikValues.degree != undefined)
       formData.append(
         "educations[0][degree_id]",
         formikValues.degree.value + 1
       );
+    formData.append("educations[0][institute]", formikValues.institute);
     formData.append("educations[0][due_date]", formikValues.eduEndDate);
     formData.append("educations[0][description]", formikValues.eduDescription);
-  }
-  // fillData();
 
+    for (let index = 0; index < experiences.length; index++) {
+      let num = index + 1;
+      formData.append(
+        "experiences[" + num + "][position]",
+        experiences[index].position
+      );
+      formData.append(
+        "experiences[" + num + "][employer]",
+        experiences[index].employer
+      );
+      formData.append(
+        "experiences[" + num + "][start_date]",
+        experiences[index].jobStartDate
+      );
+      formData.append(
+        "experiences[" + num + "][due_date]",
+        experiences[index].jobEndDate
+      );
+      formData.append(
+        "experiences[" + num + "][description]",
+        experiences[index].jobDescription
+      );
+    }
+    for (let index = 0; index < educations.length; index++) {
+      let num = index + 1;
+      if (educations[index].degree != undefined)
+        formData.append(
+          "educations[" + num + "][degree_id]",
+          educations[index].degree.value + 1
+        );
+      formData.append(
+        "educations[" + num + "][institute]",
+        educations[index].institute
+      );
+      formData.append(
+        "educations[" + num + "][due_date]",
+        educations[index].eduEndDate
+      );
+      formData.append(
+        "educations[" + num + "][description]",
+        educations[index].eduDescription
+      );
+
+      // formData.append("educations[0][due_date]", formikValues.eduEndDate);
+      // formData.append("educations[0][description]", formikValues.eduDescription);
+    }
+  }
+  fillData();
+  console.log("formData");
+  console.log(formData);
+  console.log("datavalues = ");
   for (const value of formData.values()) {
-    console.log("datavaluesssssssssssssssssssss = ");
     console.log(value);
   }
 
@@ -338,12 +389,12 @@ export default function Form3({ aa, setResponse }) {
                 <div className="wrapper laptop:w-[47%] w-[100%]">
                   {InputElement(
                     "date",
-                    "due_date",
+                    "eduEndDate",
                     "დაწყების რიცხვი",
                     "",
                     "",
-                    errors.due_date,
-                    touched.due_date,
+                    errors.eduEndDate,
+                    touched.eduEndDate,
                     1
                   )}
                 </div>
@@ -498,12 +549,12 @@ export default function Form3({ aa, setResponse }) {
                       <div className="wrapper laptop:w-[47%] w-[100%]">
                         {InputElement(
                           "date",
-                          "due_date",
+                          "eduEndDate",
                           "დაწყების რიცხვი",
                           "",
                           "",
-                          errors.due_date,
-                          touched.due_date,
+                          errors.eduEndDate,
+                          touched.eduEndDate,
                           1
                         )}
                       </div>

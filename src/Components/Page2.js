@@ -14,7 +14,7 @@ export default function Page2({ aa }) {
   }
   // console.log(value);
   return (
-    <div className="h-fit flex flex-col justify-between tablet:flex-row tracking-normal">
+    <div className="h-fit flex flex-col justify-between tablet:flex-row tracking-normal bg-bgGray">
       <Form2 aa={(e) => stuff(e)} />
       <Resume changed={changed} />
     </div>

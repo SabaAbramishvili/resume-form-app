@@ -2,16 +2,31 @@ import { useEffect, useRef, React, useState } from "react";
 import isEqual from "react-fast-compare";
 import phoneicon from "./Images/phoneicon.svg";
 import emailicon from "./Images/emailicon.svg";
+import logoicon from "./Images/logoresume.svg";
 
 export default function ResumeFinal({ changed, Filledresponse }) {
   const [values1, setValues1] = useState("");
   const [values2, setValues2] = useState("");
+  const [educations, setEducations] = useState("");
+  const [experiences, setExperiences] = useState("");
 
   //   let i = changed();
   // console.log(i);
+  console.log("'''''''''''''''''''''''''''''''''''''''''''''''''''");
   console.log("response=====");
   console.log(Filledresponse);
-  console.log(Filledresponse.length);
+  console.log(educations);
+  console.log(experiences);
+
+  useEffect(() => {
+    setEducations(Filledresponse.educations);
+    setExperiences(Filledresponse.experiences);
+  }, []);
+  useEffect(() => {
+    setEducations(Filledresponse.educations);
+    setExperiences(Filledresponse.experiences);
+  }, [Filledresponse]);
+
   //   setValues1(Filledresponse);
   useEffect(() => {
     setValues2(Filledresponse);
@@ -27,128 +42,267 @@ export default function ResumeFinal({ changed, Filledresponse }) {
       // console.log("loaded");
     }
   }, []);
+
+  const AddedExperiences = (experiences) => {
+    return (
+      <div className="wrapper h-fit mb-0 mt-4">
+        {experiences.position ? (
+          <>
+            <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
+              {/* {experiences.position + ", " + experiences.employer} */}
+              {experiences.position ? experiences.position + ", " : ""}
+              {experiences.employer ? experiences.employer : ""}
+            </p>
+            <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
+              {experiences.start_date ? experiences.start_date + " - " : ""}
+              {experiences.due_date ? experiences.due_date : ""}
+            </p>
+            <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
+              {experiences.description}
+            </p>
+          </>
+        ) : null}
+        {/* {experiences.position &&
+        experiences.employer &&
+        experiences.start_date &&
+        experiences.due_date &&
+        experiences.description ? (
+          <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
+        ) : null} */}
+      </div>
+    );
+  };
+
+  const AddedEducations = (educations) => {
+    return (
+      <div className="wrapper h-fit mt-3 mb-0">
+        {educations.institute ? (
+          <>
+            <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
+              {/* {educations.position + ", " + educations.employer} */}
+              {educations.institute ? educations.institute + ", " : ""}
+              {educations.degree ? educations.degree : ""}
+            </p>
+            <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-2 italic ">
+              {educations.due_date ? educations.due_date : null}
+            </p>
+            <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3 font-hel  ">
+              {educations.description}
+            </p>
+          </>
+        ) : null}
+        {/* {educations.institute &&
+        educations.degree &&
+        educations.due_date &&
+        educations.description ? (
+          <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
+        ) : null} */}
+        {/* {createNewForms({ experiences })} */}
+      </div>
+    );
+  };
+
+  function createNewExperiences() {
+    if (experiences)
+      for (let index = 1; index <= experiences.length; index++) {
+        console.log("sssssssssssssssssssss");
+        console.log(index);
+        console.log(experiences[index]);
+        // return AddedExperiences(experiences[index - 1]);
+        return [...Array(experiences.length - 1)].map((e, i) => (
+          <div>{AddedExperiences(experiences[i + 1], index)}</div>
+        ));
+      }
+  }
+
+  function createNewEducations() {
+    if (educations)
+      for (let index = 1; index <= educations.length; index++) {
+        console.log("sssssssssssssssssssss");
+        console.log(index);
+        console.log(educations[index]);
+        // return AddedEducations(educations[index - 1]);
+        return [...Array(educations.length - 1)].map((e, i) => (
+          <div>{AddedEducations(educations[i + 1], index)}</div>
+        ));
+      }
+  }
+
   // console.log(values1.photo);
   return (
-    <div className="w-[100%] tablet:w-[42%] h-fit bg-white flex flex-row  justify-left box-border font-hel ">
-      <div className="w-[8.5%]"></div>
-      {/* {console.log(values1)} */}
-      <div className="w-[83%] h-fit  flex flex-col mt-[74px] pb-20">
-        {values1 ? (
-          <div className="w-[100%] h-fit  flex flex-col ">
-            <div className="flex w-[100%] h-fit flex-row mb-3">
-              <div className="flex w-[62%] h-fit flex-col ">
-                <div className="wrapper min-h-[36px]">
-                  <p className="text-3xl font-extrabold text-orangeText">
-                    {values1.firstName ? values1.firstName + " " : null}
-                    {values1.lastName ? values1.lastName : null}
-                  </p>
-                </div>
-                <div className="wrapper min-h-[74px]">
-                  <div className="flex flex-row">
-                    {values1.email ? (
-                      <>
-                        <img
-                          src={emailicon}
-                          alt=""
-                          className={"w-[20px] h-[20px] mt-[6px] mr-2"}
-                        ></img>
+    <div className="w-[80%] tablet:w-[820px] flex justify-center items-center align-middle mx-auto my-10 px-20 border-solid border-[1px] border-black">
+      <div className="w-[100%]  h-fit bg-white flex  justify-left box-border font-hel break-words ">
+        {/* {console.log(values1)} */}
+        <div className="w-[83%] h-fit  flex flex-col mt-[74px] pb-10 ">
+          {Filledresponse ? (
+            <div className="w-[100%] h-fit  flex flex-col ">
+              <div className="flex w-[100%] h-fit flex-row mb-3">
+                <div className="flex w-[62%] h-fit flex-col ">
+                  <div className="wrapper min-h-[36px]">
+                    <p className="text-3xl font-extrabold text-orangeText">
+                      {Filledresponse.name ? Filledresponse.name + " " : null}
+                      {Filledresponse.surname ? Filledresponse.surname : null}
+                    </p>
+                  </div>
+                  <div className="wrapper min-h-[74px]">
+                    <div className="flex flex-row">
+                      {Filledresponse.email ? (
+                        <>
+                          <img
+                            src={emailicon}
+                            alt=""
+                            className={"w-[20px] h-[20px] mt-[6px] mr-2"}
+                          ></img>
 
-                        <p className="  text-lg font-medium text-black mb-1 ">
-                          {values1.email}
+                          <p className="  text-lg font-medium text-black mb-1 ">
+                            {Filledresponse.email}
+                          </p>
+                        </>
+                      ) : null}
+                    </div>
+                    <div className="flex flex-row">
+                      {Filledresponse.phone_number ? (
+                        <>
+                          <img
+                            src={phoneicon}
+                            alt=""
+                            className={"w-[20px] h-[20px] mt-[6px] mr-2"}
+                          ></img>
+
+                          <p className="text-lg  font-medium  text-black mb-1   ">
+                            {Filledresponse.phone_number}
+                          </p>
+                        </>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="wrapper h-fit mb-0">
+                    {Filledresponse.about_me ? (
+                      <>
+                        <p className="text-lg h-fit font-bold text-orangeText mb-4">
+                          {"ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px] font-medium leading-5 mb-3 ">
+                          {Filledresponse.about_me}
                         </p>
                       </>
                     ) : null}
                   </div>
-                  <div className="flex flex-row">
-                    {values1.number ? (
-                      <>
-                        <img
-                          src={phoneicon}
-                          alt=""
-                          className={"w-[20px] h-[20px] mt-[6px] mr-2"}
-                        ></img>
-
-                        <p className="text-lg  font-medium  text-black mb-1   ">
-                          {values1.number}
-                        </p>
-                      </>
+                </div>
+                <div className="flex w-[38%] h-fit flex-col ">
+                  <div className="flex w-fit h-fit flex-col ">
+                    {/* {Filledresponse.image ? (
+                      <img
+                        src={Filledresponse ? Filledresponse.image : null}
+                        alt=""
+                        className={"w-[100%] aspect-square rounded-full"}
+                      ></img>
+                    ) : null} */}
+                    {values1.photo ? (
+                      <img
+                        src={values1 ? values1.photo : null}
+                        alt=""
+                        className={"w-[100%] aspect-square rounded-full"}
+                      ></img>
                     ) : null}
                   </div>
                 </div>
-                <div className="wrapper h-fit mb-0">
-                  {values1.personalInfo ? (
-                    <>
-                      <p className="text-lg h-fit font-bold text-orangeText mb-4">
-                        {"ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px] font-medium leading-5 mb-3 ">
-                        {values1.personalInfo}
-                      </p>
-                    </>
-                  ) : null}
-                </div>
               </div>
-              <div className="flex w-[38%] h-fit flex-col ">
-                <div className="flex w-fit h-fit flex-col ">
-                  {values1.photo ? (
-                    <img
-                      src={values1 ? values1.photo : null}
-                      alt=""
-                      className={"w-[100%] aspect-square rounded-full"}
-                    ></img>
-                  ) : null}
+              {Filledresponse.name &&
+              Filledresponse.surname &&
+              values1.photo ? (
+                <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
+              ) : null}
+              <div
+                className={
+                  Filledresponse.experiences[0].position &&
+                  Filledresponse.experiences[0].employer
+                    ? "w-[100%] h-fit  flex flex-col "
+                    : "hidden"
+                }
+              >
+                <div className="wrapper min-h-[36px] mt-5 mb-5">
+                  <div className="wrapper h-fit mb-0">
+                    {Filledresponse.experiences[0].position ? (
+                      <>
+                        <p className="text-lg h-fit font-bold text-orangeText mb-3">
+                          {"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ"}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
+                          {/* {Filledresponse.experiences[0].position + ", " + Filledresponse.experiences[0].employer} */}
+                          {Filledresponse.experiences[0].position
+                            ? Filledresponse.experiences[0].position + ", "
+                            : ""}
+                          {Filledresponse.experiences[0].employer
+                            ? Filledresponse.experiences[0].employer
+                            : ""}
+                        </p>
+                        <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
+                          {Filledresponse.experiences[0].start_date
+                            ? Filledresponse.experiences[0].start_date + " - "
+                            : ""}
+                          {Filledresponse.experiences[0].due_date
+                            ? Filledresponse.experiences[0].due_date
+                            : ""}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
+                          {Filledresponse.experiences[0].description}
+                        </p>
+                      </>
+                    ) : null}
+                    {Filledresponse.experiences[0].position &&
+                    Filledresponse.experiences[0].employer &&
+                    Filledresponse.experiences[0].start_date &&
+                    Filledresponse.experiences[0].due_date &&
+                    Filledresponse.experiences[0].description ? (
+                      <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
+                    ) : null}
+                    {createNewExperiences({ experiences })}
+                  </div>
+                  <div className="wrapper h-fit mt-5 mb-0">
+                    {Filledresponse.experiences[0].position ? (
+                      <>
+                        <p className="text-lg h-fit font-bold text-orangeText mb-3">
+                          {"ᲒᲐᲜᲐᲗᲚᲔᲑᲐ"}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
+                          {/* {values1.position + ", " + values1.employer} */}
+                          {Filledresponse.educations[0].institute
+                            ? Filledresponse.educations[0].institute + ", "
+                            : ""}
+                          {Filledresponse.educations[0].degree
+                            ? Filledresponse.educations[0].degree
+                            : ""}
+                        </p>
+                        <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
+                          {Filledresponse.educations[0].due_date
+                            ? Filledresponse.educations[0].due_date
+                            : null}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
+                          {Filledresponse.educations[0].description}
+                        </p>
+                      </>
+                    ) : null}
+                    {Filledresponse.educations[0].institute &&
+                    Filledresponse.educations[0].degree &&
+                    Filledresponse.educations[0].due_date &&
+                    Filledresponse.educations[0].description ? (
+                      <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
+                    ) : null}
+                    {createNewEducations({ educations })}
+                  </div>
                 </div>
               </div>
             </div>
-            {values1.firstName &&
-            values1.lastName &&
-            values1.photo &&
-            values1.photo &&
-            values1.photo ? (
-              <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
-            ) : null}
-            <div
-              className={
-                values1.position && values1.employer
-                  ? "w-[100%] h-fit  flex flex-col "
-                  : "hidden"
-              }
-            >
-              <div className="wrapper min-h-[36px] mt-5">
-                <div className="wrapper h-fit mb-0">
-                  {values1.position ? (
-                    <>
-                      <p className="text-lg h-fit font-bold text-orangeText mb-3">
-                        {"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ"}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
-                        {/* {values1.position + ", " + values1.employer} */}
-                        {values1.position ? values1.position + ", " : ""}
-                        {values1.employer ? values1.employer : ""}
-                      </p>
-                      <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
-                        {values1.startDate ? values1.startDate + " - " : ""}
-                        {values1.endDate ? values1.endDate : ""}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
-                        {values1.jobDescription}
-                      </p>
-                    </>
-                  ) : null}
-                  {values1.position &&
-                  values1.employer &&
-                  values1.startDate &&
-                  values1.endDate &&
-                  values1.jobDescription ? (
-                    <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : null}
+          ) : null}
+          <img
+            src={logoicon}
+            alt=""
+            className={"w-[42px] h-[42px] mt-40 "}
+          ></img>
+        </div>
       </div>
-      <div className="w-[8.5%]"></div>
     </div>
   );
 }

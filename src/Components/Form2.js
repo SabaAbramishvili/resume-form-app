@@ -53,22 +53,9 @@ export default function Form2({ aa }) {
   const [show, setShow] = useState(0);
   const [errors, setErrors] = useState();
   const [errors2, setErrors2] = useState();
-  const [allErrors, setAllErrors] = useState("");
   const [index, setIndex] = useState("");
-  const [myArray, updateMyArray] = useState([]);
-  // const [num, setNum] = useState("");
   const [state, setState] = useState({});
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
 
-  // console.log(state);
-
-  console.log("form2errors = ");
   let err;
   if (errors != undefined) {
     let num = Object.keys(errors);
@@ -78,14 +65,8 @@ export default function Form2({ aa }) {
       console.log(key, errors[key]);
     });
   }
-  console.log(index);
-  console.log(err);
-  console.log(errors);
-  // err.push(errors);
+
   useEffect(() => {
-    console.log(
-      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssss"
-    );
     setState((prevState) => ({
       ...prevState,
       num: errors,
@@ -95,8 +76,6 @@ export default function Form2({ aa }) {
   if (errors != errors2) {
     let num = Object.keys(errors);
 
-    console.log("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
-    console.log(num);
     setState((prevState) => ({
       ...prevState,
       [num]: errors,
@@ -107,13 +86,6 @@ export default function Form2({ aa }) {
   console.log("state");
   console.log(state);
 
-  const changeShow = () => {
-    console.log("changeshow");
-    // show ? setShow(false) : setShow(true);
-    setShow(show + 1);
-  };
-
-  console.log("show = " + show);
   const changeFilled = (formikValues) => {
     console.log("experienceNumber");
     console.log(formikValues.experienceNumber);
@@ -125,12 +97,6 @@ export default function Form2({ aa }) {
       setShow(formikValues.experienceNumber);
     }
   };
-
-  // useEffect(() => {
-  //   if (filled) {
-  //     setShow(true);
-  //   }
-  // }, []);
 
   const fetchData = () => {
     return axios
@@ -146,9 +112,7 @@ export default function Form2({ aa }) {
   for (let index = 0; index < user.length; index++) {
     filledArray[index] = { value: index, label: user[index].title };
   }
-  const func = () => {
-    console.log("subbbbbbbbbbb");
-  };
+
   const NewForm2 = (index) => {
     const SignupSchema3 = Yup.object().shape({
       position: Yup.string()
@@ -175,12 +139,9 @@ export default function Form2({ aa }) {
     });
 
     function stuff(formikValues) {
-      // console.log(formikValues);
       changeFilled(formikValues);
       aa(0);
     }
-    // console.log("indexxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    // console.log(index);
 
     return (
       <Formik
@@ -198,7 +159,6 @@ export default function Form2({ aa }) {
         onSubmit={(values) => {
           console.log("submitted");
           alert("submitted");
-          // navigate("/page1");
         }}
       >
         {({
@@ -214,9 +174,7 @@ export default function Form2({ aa }) {
               Object.values(values).every((x) => x === null || x === "")
                 ? setErrors({ [index]: null })
                 : setErrors({ [index]: errors });
-              // Object.values(values).every((x) => x === null || x === "")
-              //   ? setErrors(null)
-              //   : setErrors(errors);
+
               Object.values(values).every((x) => x === null || x === "")
                 ? setFieldValue("experienceNumber", show)
                 : setFieldValue("experienceNumber", show);
@@ -225,19 +183,8 @@ export default function Form2({ aa }) {
               Object.values(values).every((x) => x === null || x === "")
                 ? setErrors({ [index]: null })
                 : setErrors({ [index]: errors });
-              // Object.values(values).every((x) => x === null || x === "")
-              //   ? setErrors(null)
-              //   : setErrors(errors);
             }}
           >
-            {/* {Object.values(values).every((x) => x === null || x === "") ||
-            show === "false"
-              ? console.log("empty")
-              : console.log("not empty")} */}
-
-            {/* {console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")} */}
-            {/* {console.log(errors)} */}
-
             <div className="wrapper mt-8">
               <div className="wrapper">
                 {InputElement(
@@ -302,7 +249,6 @@ export default function Form2({ aa }) {
             </div>
             <FormikPersist
               name={"experiences" + index}
-              // name={"experience"}
               doit={(e) => {
                 stuff(e);
               }}
@@ -323,7 +269,6 @@ export default function Form2({ aa }) {
 
   function submit() {
     console.log("Eeeeeeee");
-    // console.log(Object.keys(state));
     let valid = true;
     Object.keys(state).forEach((element) => {
       let val1;
@@ -374,8 +319,7 @@ export default function Form2({ aa }) {
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("submitted");
-                // navigate("/page3");
-                // alert("submitted");
+
                 submit();
               }}
             >
@@ -388,12 +332,6 @@ export default function Form2({ aa }) {
                 submitForm,
               }) => (
                 <Form>
-                  {/* 
-                  
-                  
-                  */}
-                  {/* {console.log(errors)} */}
-                  {/* {console.log(touched)} */}
                   <div className="wrapper mb-0">
                     <div className="wrapper">
                       {InputElement(
@@ -467,32 +405,21 @@ export default function Form2({ aa }) {
                     }}
                   />
 
-                  <div className={"wrapper"}>
-                    {
-                      createNewForms(show)
-                      // NewForm2()
-                    }
-                  </div>
+                  <div className={"wrapper"}>{createNewForms(show)}</div>
                   <div className="wrapper mt-10">
                     <button
                       type="button"
-                      onClick={
-                        () => {
-                          setShow(show + 1);
-                          console.log(values);
-                          setFieldValue("experienceNumber", show + 1);
-                          setFieldValue("position", values.position);
-                          setFieldTouched("position", true);
-                          window.localStorage.setItem(
-                            "page1",
-                            JSON.stringify(values)
-                          );
-                        }
-
-                        // changeShow().then(
-                        //   setFieldValue("experienceNumber", show)
-                        // )
-                      }
+                      onClick={() => {
+                        setShow(show + 1);
+                        console.log(values);
+                        setFieldValue("experienceNumber", show + 1);
+                        setFieldValue("position", values.position);
+                        setFieldTouched("position", true);
+                        window.localStorage.setItem(
+                          "page1",
+                          JSON.stringify(values)
+                        );
+                      }}
                       className="bg-buttonBlue text-white py-3 px-8 rounded-md w-fit hover:bg-buttonBlueLight tracking-wide"
                     >
                       მეტი გამოცდილების დამატება

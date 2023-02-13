@@ -51,9 +51,6 @@ export default function Form1({ aa }) {
         <Navbar pageName={"ᲞᲘᲠᲐᲓᲘ ᲘᲜᲤᲝ"} pageNum={"1/3"} />
         <div className="w-[100%] h-fit bg-bgGray flex flex-col box-border font-hel pb-20 items-center">
           <div className="w-[72%] h-screen bg-bgGray flex flex-col">
-            {/* 
-            
-            */}
             <Formik
               initialValues={{
                 name: "",
@@ -88,10 +85,6 @@ export default function Form1({ aa }) {
                 setFieldTouched,
               }) => (
                 <Form>
-                  {/* 
-            
-            */}
-
                   <div className="wrapper ">
                     {InputElement(
                       "text",
@@ -192,10 +185,6 @@ export default function Form1({ aa }) {
                     )}
                   </div>
 
-                  {/* 
-                
-
-                */}
                   <div className="flex justify-end mt-16">
                     <button
                       type="submit"

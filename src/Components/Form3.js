@@ -38,38 +38,8 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
     degree: Yup.object().required("Required"),
     eduEndDate: Yup.string().required("Required"),
     eduDescription: Yup.string().required("Required"),
+  });
 
-    education2: Yup.string().when([], {
-      is: () => filled && true,
-      then: Yup.string()
-        .min(2, "Too Short!")
-        .required("Passphrase is required"),
-      otherwise: Yup.string().notRequired(),
-    }),
-  });
-  const SignupSchema2 = Yup.object().shape({
-    position: Yup.string()
-      .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
-      .required("Required"),
-    employer: Yup.string()
-      .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
-      .required("Required"),
-    startDate: Yup.string().required("Required"),
-    endDate: Yup.string().required("Required"),
-    jobDescription: Yup.string()
-      .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
-      .required("Required"),
-    // education: Yup.string().when([], {
-    //   is: () => filled && true,
-    //   then: Yup.string()
-    //     .min(2, "Too Short!")
-    //     .required("Passphrase is required"),
-    //   otherwise: Yup.string().notRequired(),
-    // }),
-  });
   function stuff(formikValues) {
     // console.log(formikValues);
     setFormikValues(formikValues);
@@ -84,7 +54,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
   const [errors, setErrors] = useState("");
   const [formikValues, setFormikValues] = useState("");
   const [state, setState] = useState({});
-  const [index, setIndex] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,15 +62,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
       [name]: value,
     }));
   };
-
-  const changeShow = () => {
-    console.log("changeshow");
-    // show ? setShow(false) : setShow(true);
-    setShow(show + 1);
-  };
-  // console.log("vaaaaaaaaaaaaalll");
-  // console.log(formikValues);
-  // console.log("show = " + show);
 
   const changeFilled = (formikValues) => {
     console.log("educationNumber");
@@ -222,30 +182,13 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
         "educations[" + num + "][description]",
         educations[index].eduDescription
       );
-
-      // formData.append("educations[0][due_date]", formikValues.eduEndDate);
-      // formData.append("educations[0][description]", formikValues.eduDescription);
     }
   }
-  // fillData();
-  // console.log("formData");
-  // console.log(formData);
-  // console.log("datavalues = ");
-  // for (const value of formData.values()) {
-  //   console.log(value);
-  // }
-
-  // console.log(photo);
-
-  //
 
   const filledArray = new Array(user.length);
   for (let index = 0; index < user.length; index++) {
     filledArray[index] = { value: index, label: user[index].title };
   }
-  const func = () => {
-    console.log("subbbbbbbbbbb");
-  };
 
   function post() {
     console.log("dataaaaaaaaa");
@@ -300,12 +243,9 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
     });
 
     function stuff(formikValues) {
-      // console.log(formikValues);
       changeFilled(formikValues);
       aa(0);
     }
-    // console.log("indexxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    // console.log(index);
 
     return (
       <Formik
@@ -320,8 +260,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
         validationSchema={SignupSchema3}
         onSubmit={(values) => {
           console.log("submitted");
-          // alert("submitted");
-          // navigate("/page1");
         }}
       >
         {({
@@ -337,9 +275,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
               Object.values(values).every((x) => x === null || x === "")
                 ? setErrors({ [index]: null })
                 : setErrors({ [index]: errors });
-              // Object.values(values).every((x) => x === null || x === "")
-              //   ? setErrors(null)
-              //   : setErrors(errors);
+
               Object.values(values).every((x) => x === null || x === "")
                 ? setFieldValue("educationNumber", show)
                 : setFieldValue("educationNumber", show);
@@ -380,8 +316,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                       setTimeout(function () {
                         setFieldTouched("degree", true);
                       }, 100);
-
-                      // (setFieldTouched("degree", true));
                     },
                     filledArray
                   )}
@@ -422,7 +356,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
             </div>
             <FormikPersist
               name={"educations" + index}
-              // name={"experience"}
               doit={(e) => {
                 stuff(e);
               }}
@@ -438,13 +371,10 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
       console.log(index);
       let i = index;
       return [...Array(show)].map((e, i) => <div>{NewForm2(i)}</div>);
-      // console.log("arrr");
-      // console.log([...Array(show)]);
     }
   }
   function submit() {
     console.log("Eeeeeeee");
-    // console.log(Object.keys(state));
     let valid = true;
     Object.keys(state).forEach((element) => {
       let val1;
@@ -489,9 +419,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("submitted");
-                // alert("Aaaaaa");
-                // navigate("/page1");
-                // post();
+
                 fillData();
                 doPostRequest();
               }}
@@ -505,13 +433,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                 submitForm,
               }) => (
                 <Form>
-                  {/* 
-                  
-                  
-                  */}
-                  {/* {console.log(values)}
-                  {console.log(errors)}
-                  {console.log(touched)} */}
                   <div className="wrapper mb-0">
                     <div className="wrapper">
                       {InputElement(
@@ -541,8 +462,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                             setTimeout(function () {
                               setFieldTouched("degree", true);
                             }, 100);
-
-                            // (setFieldTouched("degree", true));
                           },
                           filledArray
                         )}
@@ -560,7 +479,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                         )}
                       </div>
                     </div>
-                    {/* {console.log(errors)} */}
 
                     <div className="wrapper ">
                       {InputElementLarge(
@@ -590,12 +508,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                     }}
                   />
 
-                  <div className={"wrapper"}>
-                    {
-                      createNewForms(show)
-                      // newForm2()
-                    }
-                  </div>
+                  <div className={"wrapper"}>{createNewForms(show)}</div>
 
                   <div className="wrapper mt-16">
                     <button
@@ -616,7 +529,6 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                       მეტი გამოცდილების დამატება
                     </button>
                   </div>
-                  {/* <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]  "></div> */}
 
                   <div className="wrapper flex-row justify-between mt-24">
                     <button

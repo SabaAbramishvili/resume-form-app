@@ -270,7 +270,7 @@ export default function Form2({ aa }) {
             {/* {console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")} */}
             {/* {console.log(errors)} */}
 
-            <div className="wrapper">
+            <div className="wrapper mt-8">
               <div className="wrapper">
                 {InputElement(
                   "text",
@@ -330,19 +330,7 @@ export default function Form2({ aa }) {
                   1
                 )}
               </div>
-              {/* {console.log(values)} */}
-              <button
-                type="button"
-                // onClick={() => {
-                //   Object.values(values).every((x) => x === null || x === "")
-                //     ? setErrors(null)
-                //     : setErrors(errors);
-                // }}
-                onClick={submitForm}
-                className="bg-fuchsia-600"
-              >
-                eee
-              </button>
+              <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]  mt-4"></div>
             </div>
             <FormikPersist
               name={"experiences" + index}
@@ -387,24 +375,11 @@ export default function Form2({ aa }) {
           console.log("not validdddd");
         }
       }
-      // if (
-      //   JSON.stringify(state[element][element]) === "{}" ||
-      //   state[element][element] === undefined ||
-      //   state[element][element] === ""
-      // ) {
-      //   console.log("validdddddddddddd");
-      // } else {
-      //   valid = false;
-      //   console.log("not validdddd");
-      // }
-      // console.log(state[element][element]);
     });
     console.log(valid);
     if (valid) {
       navigate("/page3");
     }
-
-    alert("Aaaaaaaaa");
   }
 
   return (
@@ -451,7 +426,7 @@ export default function Form2({ aa }) {
                   */}
                   {/* {console.log(errors)} */}
                   {/* {console.log(touched)} */}
-                  <div className="wrapper">
+                  <div className="wrapper mb-0">
                     <div className="wrapper">
                       {InputElement(
                         "text",
@@ -515,6 +490,7 @@ export default function Form2({ aa }) {
                       )}
                     </div>
                   </div>
+                  <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]  "></div>
 
                   <FormikPersist
                     name="page1"
@@ -529,15 +505,7 @@ export default function Form2({ aa }) {
                       // NewForm2()
                     }
                   </div>
-                  <div className="wrapper flex-row justify-between">
-                    <button
-                      type="button"
-                      onClick={() => navigate("/page1")}
-                      className="bg-sky-200"
-                    >
-                      უკან
-                    </button>
-
+                  <div className="wrapper mt-10">
                     <button
                       type="button"
                       onClick={
@@ -557,16 +525,26 @@ export default function Form2({ aa }) {
                         //   setFieldValue("experienceNumber", show)
                         // )
                       }
-                      className="bg-sky-800"
+                      className="bg-buttonBlue text-white py-3 px-8 rounded-md w-fit hover:bg-buttonBlueLight tracking-wide"
                     >
-                      kidoo
+                      მეტი გამოცდილების დამატება
                     </button>
+                  </div>
+                  <div className="wrapper flex-row justify-between mt-16">
+                    <button
+                      type="button"
+                      onClick={() => navigate("/page1")}
+                      className="bg-buttonIndigo text-white py-3 px-8 rounded-md hover:bg-buttonIndigoLight tracking-widest"
+                    >
+                      უკან
+                    </button>
+
                     <button
                       type="button"
                       onClick={submitForm}
-                      className="bg-sky-600"
+                      className="bg-buttonIndigo text-white py-3 px-8 rounded-md hover:bg-buttonIndigoLight tracking-widest "
                     >
-                      Submit
+                      შემდეგი
                     </button>
                   </div>
                 </Form>

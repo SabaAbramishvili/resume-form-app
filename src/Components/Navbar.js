@@ -13,7 +13,7 @@ export default function Navbar(props) {
     <div
       className={
         props.pageName
-          ? "w-[86.5%] h-fit flex flex-col mt-4 mb-16 box-border font-hel items-start justify-start "
+          ? "w-[86.5%] h-fit flex flex-col mt-4 mb-14 box-border font-hel items-start justify-start "
           : "hidden"
       }
     >

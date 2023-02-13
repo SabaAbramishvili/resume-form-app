@@ -196,9 +196,14 @@ export default function Form1({ aa }) {
                 
 
                 */}
-                  <button type="submit" className="bg-green-900">
-                    Submit
-                  </button>
+                  <div className="flex justify-end mt-16">
+                    <button
+                      type="submit"
+                      className="bg-buttonIndigo text-white py-3 px-8 rounded-md hover:bg-buttonIndigoLight tracking-widest"
+                    >
+                      შემდეგი
+                    </button>
+                  </div>
                   <FormikPersist name="page1" doit={(e) => stuff(e)} />
                 </Form>
               )}

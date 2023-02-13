@@ -20,6 +20,7 @@ module.exports = {
         homePage2: "url('./Components/Images/home2.png')",
         homePage3: "url('./Components/Images/home3.jpg')",
         logo: "url('./Components/Images/logo.svg')",
+        xicon: "url('./Components/Images/xicon.svg')",
       },
       fontFamily: {
         hel: ["HelveticaNeue"],
@@ -35,6 +36,10 @@ module.exports = {
         greenElement: "rgba(152,227,126,1)",
         orangeText: "rgba(249,59,29,1)",
         textGray: "rgba(144,144,144,1)",
+        buttonIndigo: "rgba(107,64,227,1)",
+        buttonIndigoLight: "rgba(121,73,255,1)",
+        buttonBlue: " rgba(98,161,235,1)",
+        buttonBlueLight: " rgba(125,180,245,1)",
       },
     },
   },

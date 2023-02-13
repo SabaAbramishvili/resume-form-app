@@ -73,7 +73,7 @@ export default function Resume({ changed, setExp, setEdu }) {
   console.log(educations);
 
   const AddedExperiences = (experiences) => {
-    return (
+    return experiences ? (
       <div className="wrapper h-fit mb-0 mt-4">
         {experiences.position ? (
           <>
@@ -91,19 +91,21 @@ export default function Resume({ changed, setExp, setEdu }) {
             </p>
           </>
         ) : null}
-        {experiences.position &&
-        experiences.employer &&
-        experiences.jobStartDate &&
-        experiences.jobEndDate &&
-        experiences.jobDescription ? (
-          <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
+        {experiences ? (
+          experiences.position &&
+          experiences.employer &&
+          experiences.jobStartDate &&
+          experiences.jobEndDate &&
+          experiences.jobDescription ? (
+            <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
+          ) : null
         ) : null}
       </div>
-    );
+    ) : null;
   };
 
   const AddedEducations = (educations) => {
-    return (
+    return educations ? (
       <div className="wrapper h-fit mt-5 mb-0">
         {educations.institute ? (
           <>
@@ -126,20 +128,21 @@ export default function Resume({ changed, setExp, setEdu }) {
         educations.eduDescription ? (
           <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
         ) : null}
-        {/* {createNewForms({ experiences })} */}
       </div>
-    );
+    ) : null;
   };
 
   function createNewExperiences() {
-    for (let index = 1; index <= experiences.length; index++) {
-      console.log("sssssssssssssssssssss");
-      console.log(index);
-      console.log(experiences[index - 1]);
-      // return AddedExperiences(experiences[index - 1]);
-      return [...Array(experiences.length)].map((e, i) => (
-        <div>{AddedExperiences(experiences[i], index)}</div>
-      ));
+    if (experiences) {
+      for (let index = 1; index <= experiences.length; index++) {
+        console.log("sssssssssssssssssssss");
+        console.log(index);
+        console.log(experiences[index - 1]);
+        // return AddedExperiences(experiences[index - 1]);
+        return [...Array(experiences.length)].map((e, i) => (
+          <div>{AddedExperiences(experiences[i], index)}</div>
+        ));
+      }
     }
   }
 
@@ -255,8 +258,10 @@ export default function Resume({ changed, setExp, setEdu }) {
                         {values1.employer ? values1.employer : ""}
                       </p>
                       <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
-                        {values1.startDate ? values1.startDate + " - " : ""}
-                        {values1.endDate ? values1.endDate : ""}
+                        {values1.JobStartDate
+                          ? values1.jobStartDate + " - "
+                          : ""}
+                        {values1.jobEndDate ? values1.jobEndDate : ""}
                       </p>
                       <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
                         {values1.jobDescription}
@@ -273,7 +278,7 @@ export default function Resume({ changed, setExp, setEdu }) {
                   {createNewExperiences({ experiences })}
                 </div>
                 <div className="wrapper h-fit mt-5 mb-0">
-                  {values1.position ? (
+                  {values1.institute ? (
                     <>
                       <p className="text-lg h-fit font-bold text-orangeText mb-3">
                         {"ᲒᲐᲜᲐᲗᲚᲔᲑᲐ"}
@@ -291,11 +296,10 @@ export default function Resume({ changed, setExp, setEdu }) {
                       </p>
                     </>
                   ) : null}
-                  {values1.position &&
-                  values1.employer &&
-                  values1.jobStartDate &&
-                  values1.jobEndDate &&
-                  values1.jobDescription ? (
+                  {values1.institute &&
+                  values1.degree &&
+                  values1.eduEndDate &&
+                  values1.eduDescription ? (
                     <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
                   ) : null}
                   {createNewEducations({ educations })}

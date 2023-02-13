@@ -227,13 +227,13 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
       // formData.append("educations[0][description]", formikValues.eduDescription);
     }
   }
-  fillData();
-  console.log("formData");
-  console.log(formData);
-  console.log("datavalues = ");
-  for (const value of formData.values()) {
-    console.log(value);
-  }
+  // fillData();
+  // console.log("formData");
+  // console.log(formData);
+  // console.log("datavalues = ");
+  // for (const value of formData.values()) {
+  //   console.log(value);
+  // }
 
   // console.log(photo);
 
@@ -320,7 +320,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
         validationSchema={SignupSchema3}
         onSubmit={(values) => {
           console.log("submitted");
-          alert("submitted");
+          // alert("submitted");
           // navigate("/page1");
         }}
       >
@@ -350,7 +350,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                 : setErrors({ [index]: errors });
             }}
           >
-            <div className="wrapper">
+            <div className="wrapper mt-5">
               <div className="wrapper">
                 {InputElement(
                   "text",
@@ -364,7 +364,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                 )}
               </div>
 
-              <div className="wrapper flex-col laptop:flex-row justify-between ">
+              <div className="wrapper flex-col laptop:flex-row justify-between mb-0 ">
                 <div className="wrapper laptop:w-[47%] w-[100%]">
                   {InputSelectElement(
                     "degree",
@@ -418,6 +418,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                   1
                 )}
               </div>
+              <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] mt-3 mb-0 "></div>
             </div>
             <FormikPersist
               name={"educations" + index}
@@ -488,7 +489,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
               validationSchema={SignupSchema}
               onSubmit={(values) => {
                 console.log("submitted");
-                alert("Aaaaaa");
+                // alert("Aaaaaa");
                 // navigate("/page1");
                 // post();
                 fillData();
@@ -511,7 +512,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                   {/* {console.log(values)}
                   {console.log(errors)}
                   {console.log(touched)} */}
-                  <div className="wrapper">
+                  <div className="wrapper mb-0">
                     <div className="wrapper">
                       {InputElement(
                         "text",
@@ -525,7 +526,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                       )}
                     </div>
 
-                    <div className="wrapper flex-col laptop:flex-row justify-between ">
+                    <div className="wrapper flex-col laptop:flex-row justify-between mb-0 ">
                       <div className="wrapper laptop:w-[47%] w-[100%]">
                         {InputSelectElement(
                           "degree",
@@ -546,7 +547,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                           filledArray
                         )}
                       </div>
-                      <div className="wrapper laptop:w-[47%] w-[100%]">
+                      <div className="wrapper laptop:w-[47%] w-[100%] ">
                         {InputElement(
                           "date",
                           "eduEndDate",
@@ -559,7 +560,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                         )}
                       </div>
                     </div>
-                    {console.log(errors)}
+                    {/* {console.log(errors)} */}
 
                     <div className="wrapper ">
                       {InputElementLarge(
@@ -579,6 +580,7 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                         1
                       )}
                     </div>
+                    <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] mt-10 mb-4"></div>
                   </div>
 
                   <FormikPersist
@@ -594,44 +596,43 @@ export default function Form3({ aa, setResponse, experiences, educations }) {
                       // newForm2()
                     }
                   </div>
-                  <div className="wrapper flex-row justify-between">
+
+                  <div className="wrapper mt-16">
                     <button
                       type="button"
-                      onClick={() => navigate("/page1")}
-                      className="bg-sky-200"
+                      onClick={() => {
+                        setShow(show + 1);
+                        console.log(values);
+                        setFieldValue("educationNumber", show + 1);
+                        setFieldValue("institute", values.institute);
+                        setFieldTouched("institute", true);
+                        window.localStorage.setItem(
+                          "page1",
+                          JSON.stringify(values)
+                        );
+                      }}
+                      className="bg-buttonBlue text-white py-3 px-8 rounded-md w-fit hover:bg-buttonBlueLight tracking-wide"
+                    >
+                      მეტი გამოცდილების დამატება
+                    </button>
+                  </div>
+                  {/* <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]  "></div> */}
+
+                  <div className="wrapper flex-row justify-between mt-24">
+                    <button
+                      type="button"
+                      onClick={() => navigate("/page2")}
+                      className="bg-buttonIndigo text-white py-3 px-8 rounded-md hover:bg-buttonIndigoLight tracking-widest"
                     >
                       უკან
                     </button>
 
                     <button
                       type="button"
-                      onClick={
-                        () => {
-                          setShow(show + 1);
-                          console.log(values);
-                          setFieldValue("educationNumber", show + 1);
-                          setFieldValue("institute", values.institute);
-                          setFieldTouched("institute", true);
-                          window.localStorage.setItem(
-                            "page1",
-                            JSON.stringify(values)
-                          );
-                        }
-
-                        // changeShow().then(
-                        //   setFieldValue("experienceNumber", show)
-                        // )
-                      }
-                      className="bg-sky-800"
-                    >
-                      kidoo
-                    </button>
-                    <button
-                      type="button"
                       onClick={submitForm}
-                      className="bg-sky-600"
+                      className="bg-buttonIndigo text-white py-3 px-8 rounded-md hover:bg-buttonIndigoLight tracking-widest "
                     >
-                      Submit
+                      შემდეგი
                     </button>
                   </div>
                 </Form>

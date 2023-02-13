@@ -170,7 +170,7 @@ export default function Resume({ changed, setExp, setEdu }) {
       <div className="w-[83%]  flex flex-col mt-[74px] pb-10 justify-between ">
         <div>
           {values1 ? (
-            <div className="w-[100%] h-fit   flex flex-col ">
+            <div className="w-[100%] h-fit   flex flex-col mb-20 ">
               <div className="flex w-[100%] h-fit   flex-row mb-3">
                 <div className="flex w-[62%] h-fit flex-col ">
                   <div className="wrapper min-h-[36px]">

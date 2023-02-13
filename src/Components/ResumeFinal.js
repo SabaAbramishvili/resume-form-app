@@ -4,6 +4,9 @@ import phoneicon from "./Images/phoneicon.svg";
 import emailicon from "./Images/emailicon.svg";
 import logoicon from "./Images/logoresume.svg";
 import xicon from "./Images/xicon.svg";
+import backicon from "./Images/backicon.svg";
+import { useNavigate } from "react-router-dom";
+
 import partypopper from "./Images/partypopper.png";
 
 export default function ResumeFinal({ changed, Filledresponse }) {
@@ -12,7 +15,7 @@ export default function ResumeFinal({ changed, Filledresponse }) {
   const [educations, setEducations] = useState("");
   const [experiences, setExperiences] = useState("");
   const [visibility, setVisibility] = useState(false);
-
+  const navigate = useNavigate();
   //   let i = changed();
   // console.log(i);
   console.log("'''''''''''''''''''''''''''''''''''''''''''''''''''");
@@ -126,10 +129,21 @@ export default function ResumeFinal({ changed, Filledresponse }) {
       }
   }
 
+  const getBack = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   // console.log(values1.photo);
   return (
     <div className="flex flex-row">
-      <div className="h-screen w-[29%] "></div>
+      <div className="h-screen w-[29%] ">
+        <button
+          className="w-[50px] h-[50px] bg-no-repeat bg-cover bg-center bg-backicon  ml-[50px]
+          mt-[50px]"
+          onClick={() => getBack()}
+        ></button>
+      </div>
       <div className="w-[42%]  flex flex-row   my-10 px-20 border-solid border-[1px] border-black justify-center items-center align-middle">
         <div className="w-[100%]  h-fit bg-white flex  justify-left box-border font-hel break-words ">
           <div className="w-[83%] h-fit  flex flex-col mt-[74px] pb-10 ">
@@ -305,23 +319,23 @@ export default function ResumeFinal({ changed, Filledresponse }) {
       </div>
       <div className="h-screen w-[29%] flex justify-center  ">
         {visibility ? (
-          <div className="w-[77%] h-fit  mt-10 shadow-black shadow-md rounded-lg flex flex-col px-4 py-2">
+          <div className="w-[77%] h-fit  mt-10 shadow-black shadow-md  rounded-lg flex flex-col px-4 py-2">
             <div onClick={console.log("aaaaa")} className="flex justify-end">
               <button
                 className="w-[20px] h-[20px] bg-no-repeat bg-cover bg-center bg-xicon"
                 onClick={() => setVisibility(false)}
               ></button>
             </div>
-            <div className="">
-              <h1 className="text-xl text-black font-semibold drop-shadow-lg shadow-black">
+            <div className="my-3">
+              <h1 className="text-3xl text-black font-semibold drop-shadow-lg shadow-black">
                 რეზიუმე წარმატებით
               </h1>
-              <h1 className="text-xl text-black font-semibold drop-shadow-lg shadow-black flex flex-row mt-3 mb-5">
+              <h1 className="text-3xl text-black font-semibold drop-shadow-lg shadow-black flex flex-row mt-4 mb-5">
                 გაიგზავნა
                 <img
                   src={partypopper}
                   alt=""
-                  className={"w-[25px] h-[25px] ml-4 "}
+                  className={"w-[30px] h-[30px] ml-4 mt-1 "}
                 ></img>
               </h1>
             </div>

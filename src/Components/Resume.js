@@ -160,159 +160,163 @@ export default function Resume({ changed, setExp, setEdu }) {
 
   // console.log(values1.photo);
   return (
-    <div className="w-[100%] tablet:w-[42%]  h-fit min-h-[980px] bg-white flex flex-row  justify-left box-border font-hel break-words ">
+    <div className="w-[100%] tablet:w-[42%]  h-fit min-h-[920px] bg-white flex flex-row  justify-left box-border font-hel break-words ">
       <div className="w-[8.5%]"></div>
       {/* {console.log(values1)} */}
-      <div className="w-[83%] h-100%  flex flex-col mt-[74px] pb-10 justify-between ">
-        {values1 ? (
-          <div className="w-[100%] h-fit  flex flex-col ">
-            <div className="flex w-[100%] h-fit flex-row mb-3">
-              <div className="flex w-[62%] h-fit flex-col ">
-                <div className="wrapper min-h-[36px]">
-                  <p className="text-3xl font-extrabold text-orangeText">
-                    {values1.name ? values1.name + " " : null}
-                    {values1.surname ? values1.surname : null}
-                  </p>
-                </div>
-                <div className="wrapper min-h-[74px]">
-                  <div className="flex flex-row">
-                    {values1.email ? (
-                      <>
-                        <img
-                          src={emailicon}
-                          alt=""
-                          className={"w-[20px] h-[20px] mt-[6px] mr-2"}
-                        ></img>
+      <div className="w-[83%]  flex flex-col mt-[74px] pb-10 justify-between ">
+        <div>
+          {values1 ? (
+            <div className="w-[100%] h-fit   flex flex-col ">
+              <div className="flex w-[100%] h-fit   flex-row mb-3">
+                <div className="flex w-[62%] h-fit flex-col ">
+                  <div className="wrapper min-h-[36px]">
+                    <p className="text-3xl font-extrabold text-orangeText">
+                      {values1.name ? values1.name + " " : null}
+                      {values1.surname ? values1.surname : null}
+                    </p>
+                  </div>
+                  <div className="wrapper min-h-[74px]">
+                    <div className="flex flex-row">
+                      {values1.email ? (
+                        <>
+                          <img
+                            src={emailicon}
+                            alt=""
+                            className={"w-[20px] h-[20px] mt-[6px] mr-2"}
+                          ></img>
 
-                        <p className="  text-lg font-medium text-black mb-1 ">
-                          {values1.email}
+                          <p className="  text-lg font-medium text-black mb-1 ">
+                            {values1.email}
+                          </p>
+                        </>
+                      ) : null}
+                    </div>
+                    <div className="flex flex-row">
+                      {values1.phone_number ? (
+                        <>
+                          <img
+                            src={phoneicon}
+                            alt=""
+                            className={"w-[20px] h-[20px] mt-[6px] mr-2"}
+                          ></img>
+
+                          <p className="text-lg  font-medium  text-black mb-1   ">
+                            {values1.phone_number}
+                          </p>
+                        </>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="wrapper h-fit mb-0">
+                    {values1.about_me ? (
+                      <>
+                        <p className="text-lg h-fit font-bold text-orangeText mb-4">
+                          {"ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px] font-medium leading-5 mb-3 ">
+                          {values1.about_me}
                         </p>
                       </>
                     ) : null}
                   </div>
-                  <div className="flex flex-row">
-                    {values1.phone_number ? (
-                      <>
-                        <img
-                          src={phoneicon}
-                          alt=""
-                          className={"w-[20px] h-[20px] mt-[6px] mr-2"}
-                        ></img>
-
-                        <p className="text-lg  font-medium  text-black mb-1   ">
-                          {values1.phone_number}
-                        </p>
-                      </>
+                </div>
+                <div className="flex w-[38%] h-fit flex-col ">
+                  <div className="flex w-fit h-fit flex-col ">
+                    {values1.photo ? (
+                      <img
+                        src={values1 ? values1.photo : null}
+                        alt=""
+                        className={"w-[100%] aspect-square rounded-full"}
+                      ></img>
                     ) : null}
                   </div>
                 </div>
-                <div className="wrapper h-fit mb-0">
-                  {values1.about_me ? (
-                    <>
-                      <p className="text-lg h-fit font-bold text-orangeText mb-4">
-                        {"ᲩᲔᲛ ᲨᲔᲡᲐᲮᲔᲑ"}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px] font-medium leading-5 mb-3 ">
-                        {values1.about_me}
-                      </p>
-                    </>
-                  ) : null}
-                </div>
               </div>
-              <div className="flex w-[38%] h-fit flex-col ">
-                <div className="flex w-fit h-fit flex-col ">
-                  {values1.photo ? (
-                    <img
-                      src={values1 ? values1.photo : null}
-                      alt=""
-                      className={"w-[100%] aspect-square rounded-full"}
-                    ></img>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-            {values1.name &&
-            values1.surname &&
-            values1.photo &&
-            values1.photo &&
-            values1.photo ? (
-              <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
-            ) : null}
-            <div
-              className={
-                values1.position && values1.employer
-                  ? "w-[100%] h-fit  flex flex-col "
-                  : "hidden"
-              }
-            >
-              <div className="wrapper min-h-[36px] mt-5 mb-5">
-                <div className="wrapper h-fit mb-0">
-                  {values1.position ? (
-                    <>
-                      <p className="text-lg h-fit font-bold text-orangeText mb-3">
-                        {"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ"}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
-                        {/* {values1.position + ", " + values1.employer} */}
-                        {values1.position ? values1.position + ", " : ""}
-                        {values1.employer ? values1.employer : ""}
-                      </p>
-                      <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
-                        {values1.JobStartDate
-                          ? values1.jobStartDate + " - "
-                          : ""}
-                        {values1.jobEndDate ? values1.jobEndDate : ""}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
-                        {values1.jobDescription}
-                      </p>
-                    </>
-                  ) : null}
-                  {values1.position &&
-                  values1.employer &&
-                  values1.jobStartDate &&
-                  values1.jobEndDate &&
-                  values1.jobDescription ? (
-                    <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
-                  ) : null}
-                  {createNewExperiences({ experiences })}
-                </div>
-                <div className="wrapper h-fit mt-5 mb-0">
-                  {values1.institute ? (
-                    <>
-                      <p className="text-lg h-fit font-bold text-orangeText mb-3">
-                        {"ᲒᲐᲜᲐᲗᲚᲔᲑᲐ"}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
-                        {/* {values1.position + ", " + values1.employer} */}
-                        {values1.institute ? values1.institute + ", " : ""}
-                        {values1.degree.label ? values1.degree.label : ""}
-                      </p>
-                      <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
-                        {values1.eduEndDate ? values1.eduEndDate : null}
-                      </p>
-                      <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
-                        {values1.eduDescription}
-                      </p>
-                    </>
-                  ) : null}
-                  {values1.institute &&
-                  values1.degree &&
-                  values1.eduEndDate &&
-                  values1.eduDescription ? (
-                    <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
-                  ) : null}
-                  {createNewEducations({ educations })}
+              {values1.name &&
+              values1.surname &&
+              values1.photo &&
+              values1.photo &&
+              values1.photo ? (
+                <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)]"></div>
+              ) : null}
+              <div
+                className={
+                  values1.position && values1.employer
+                    ? "w-[100%] h-fit  flex flex-col "
+                    : "hidden"
+                }
+              >
+                <div className="wrapper min-h-[36px] mt-5 mb-5">
+                  <div className="wrapper h-fit mb-0">
+                    {values1.position ? (
+                      <>
+                        <p className="text-lg h-fit font-bold text-orangeText mb-3">
+                          {"ᲒᲐᲛᲝᲪᲓᲘᲚᲔᲑᲐ"}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
+                          {/* {values1.position + ", " + values1.employer} */}
+                          {values1.position ? values1.position + ", " : ""}
+                          {values1.employer ? values1.employer : ""}
+                        </p>
+                        <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
+                          {values1.JobStartDate
+                            ? values1.jobStartDate + " - "
+                            : ""}
+                          {values1.jobEndDate ? values1.jobEndDate : ""}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
+                          {values1.jobDescription}
+                        </p>
+                      </>
+                    ) : null}
+                    {values1.position &&
+                    values1.employer &&
+                    values1.jobStartDate &&
+                    values1.jobEndDate &&
+                    values1.jobDescription ? (
+                      <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
+                    ) : null}
+                    {createNewExperiences({ experiences })}
+                  </div>
+                  <div className="wrapper h-fit mt-5 mb-0">
+                    {values1.institute ? (
+                      <>
+                        <p className="text-lg h-fit font-bold text-orangeText mb-3">
+                          {"ᲒᲐᲜᲐᲗᲚᲔᲑᲐ"}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px] font-semibold  mb-1 ">
+                          {/* {values1.position + ", " + values1.employer} */}
+                          {values1.institute ? values1.institute + ", " : ""}
+                          {values1.degree.label ? values1.degree.label : ""}
+                        </p>
+                        <p className=" text-textGray h-fit w-[100%] text-[16px] font-medium  mb-3 italic ">
+                          {values1.eduEndDate ? values1.eduEndDate : null}
+                        </p>
+                        <p className=" text-black h-fit w-[100%] text-[16px]    tracking-normal font-medium	 mb-3  font-hel  ">
+                          {values1.eduDescription}
+                        </p>
+                      </>
+                    ) : null}
+                    {values1.institute &&
+                    values1.degree &&
+                    values1.eduEndDate &&
+                    values1.eduDescription ? (
+                      <div className="flex w-[100%] h-[1px] flex-col bg-[rgba(200,200,200,1)] "></div>
+                    ) : null}
+                    {createNewEducations({ educations })}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ) : null}
-        <img
-          src={logoicon}
-          alt=""
-          className={"w-[42px] h-[42px]   flex  items-end"}
-        ></img>
+          ) : null}
+        </div>
+        <div>
+          <img
+            src={logoicon}
+            alt=""
+            className={"w-[42px] h-[42px]   flex  items-end"}
+          ></img>
+        </div>
       </div>
 
       <div className="w-[8.5%]"></div>

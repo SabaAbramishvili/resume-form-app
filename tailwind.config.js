@@ -21,6 +21,7 @@ module.exports = {
         homePage3: "url('./Components/Images/home3.jpg')",
         logo: "url('./Components/Images/logo.svg')",
         xicon: "url('./Components/Images/xicon.svg')",
+        backicon: "url('./Components/Images/backicon.svg')",
       },
       fontFamily: {
         hel: ["HelveticaNeue"],

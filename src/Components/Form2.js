@@ -31,49 +31,17 @@ export default function Form2({ aa }) {
   const SignupSchema = Yup.object().shape({
     position: Yup.string()
       .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
+      .matches(nameRegex2, "")
       .required("Required"),
     employer: Yup.string()
       .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
+      .matches(nameRegex2, "")
       .required("Required"),
     jobStartDate: Yup.string().required("Required"),
     jobEndDate: Yup.string().required("Required"),
-    jobDescription: Yup.string()
-      .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
-      .required("Required"),
-    education: Yup.string().when([], {
-      is: () => filled && true,
-      then: Yup.string()
-        .min(2, "Too Short!")
-        .required("Passphrase is required"),
-      otherwise: Yup.string().notRequired(),
-    }),
+    jobDescription: Yup.string().matches(nameRegex2, "").required("Required"),
   });
-  const SignupSchema2 = Yup.object().shape({
-    position: Yup.string()
-      .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
-      .required("Required"),
-    employer: Yup.string()
-      .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
-      .required("Required"),
-    startDate: Yup.string().required("Required"),
-    endDate: Yup.string().required("Required"),
-    jobDescription: Yup.string()
-      .min(2, "Too Short!")
-      .matches(nameRegex2, "ქართული ასოები")
-      .required("Required"),
-    // education: Yup.string().when([], {
-    //   is: () => filled && true,
-    //   then: Yup.string()
-    //     .min(2, "Too Short!")
-    //     .required("Passphrase is required"),
-    //   otherwise: Yup.string().notRequired(),
-    // }),
-  });
+
   function stuff(formikValues) {
     // console.log(formikValues);
     changeFilled(formikValues);
